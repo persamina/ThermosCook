@@ -1,0 +1,13 @@
+<div class="content"></div>
+
+<script type="application/json" id="user-data">
+<%= (( render(:file => 'users/user.rabl') ).html_safe) if @user %>
+</script>
+
+<script type="application/json" id="recipes-data">
+<%= ( render(:file => 'recipes/indexRABL.rabl') ).html_safe %>
+</script>
+
+<script type="application/json" id="articles-data">
+<%= ( render(:file => 'articles/indexRABL.rabl') ).html_safe %>
+</script>

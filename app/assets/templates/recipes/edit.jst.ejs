@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="errors"></div>
+  <div class="warnings"></div>
+  <div class="successes"></div>
+
+<div class="row">
+  <h2>Edit Recipe</h2>
+  <div id="photo_loader">
+  <form accept-charset="UTF-8" action="/recipes" class="update_recipe" enctype="multipart/form-data" method="put">
+    <input type="text" name="recipe[name]" placeholder="Name" value="<%= this.model.get("name") %>">
+    <br>
+
+    <input type="text" name="recipe[description]" placeholder="Description" value="<%= this.model.get("description") %>">
+    <br>
+
+    <h4>Ingredients</h4> <a href="" class="add_ingredient btn btn-primary">Add Ingredient</a>
+    <div class="ingredients">
+    </div>
+
+    <h4>Instructions</h4> <a href="" class="add_instruction btn btn-primary">Add Instruction</a>
+    <div class="instructions">
+    </div>
+   
+
+    <input class="btn btn-primary update_recipe" type="submit" value="Update and Edit Photos"/>
+  </form>
+</div>
+</div>

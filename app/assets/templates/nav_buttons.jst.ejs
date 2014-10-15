@@ -1,0 +1,19 @@
+<% if(ThermosCook.CurrentUser.id) { %>
+  <div class="nav-buttons">
+    <a href="/#users/user_photo" >
+    <% if( ThermosCook.CurrentUser.get('user_photos').models.length > 0 ) { %>
+        <img class="nav-user-photo" src="<%= ThermosCook.CurrentUser.get('user_photos').models[0].get("thumbnail_url") %>" >
+    <% } else { %>
+        <img class="nav-user-photo" src="portrait_blank.jpg">
+    <% } %>
+    </a>
+    <a href="" class="nav-icon" id="destroy_session">
+      <i class="fa fa-sign-out"></i>
+    </a>
+  </div>
+<% } else { %>
+  <div class="nav-buttons">
+    <a href="/#users/sign_up">Sign Up</a>
+    <a href="/#users/sign_in" class="nav-icon"><i class="fa fa-sign-in"></i></a>
+  </div>
+<% } %>

@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="errors"></div>
+  <div class="warnings"></div>
+  <div class="successes"></div>
+  <div class="row">
+    <h2>New Recipe</h2>
+    <div id="photo_loader">
+    <form accept-charset="UTF-8" action="/recipes" class="new_recipe" enctype="multipart/form-data" id="fileupload" method="post">
+      <input type="text" name="recipe[name]" placeholder="Name">
+      <br>
+
+      <input type="text" name="recipe[description]" placeholder="Description">
+      <br>
+
+      <h4>Ingredients</h4> <a href="" class="add_ingredient btn btn-primary">Add Ingredient</a>
+      <div class="ingredients">
+      </div>
+
+      <h4>Instructions</h4> <a href="" class="add_instruction btn btn-primary">Add Instruction</a>
+      <div class="instructions">
+      </div>
+
+      <input class="btn btn-primary create_recipe" type="submit" value="Create and Add Photos"/>
+    </form>
+  </div>
+</div>

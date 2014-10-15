@@ -1,0 +1,36 @@
+window.ThermosCook = {
+  Models: {},
+  Collections: {},
+  Views: {},
+  Routers: {},
+  initialize: function() {
+
+    ThermosCook.csrfToken = $("meta[name='csrf-token']").attr('content');
+    console.log(ThermosCook.csrfToken);
+    
+  }
+};
+
+$(document).ready(function(){
+  ThermosCook.initialize();
+  var recipeData;
+  var articleData;
+  var userData;
+  if($("#recipes-data").length > 0) {
+	  recipeData = JSON.parse($("#recipes-data").html());
+  }
+	ThermosCook.recipes = new ThermosCook.Collections.Recipes(recipeData, {parse: true});
+
+  if($("#articles-data").length > 0) {
+	  articleData = JSON.parse($("#articles-data").html());
+  }
+	ThermosCook.articles= new ThermosCook.Collections.Articles(articleData, {parse: true});
+
+  if($("#user-data").html() != null) {
+	  userData = JSON.parse($("#user-data").html()).user;
+  }
+	ThermosCook.CurrentUser = new ThermosCook.Models.User(userData, {parse: true});
+
+	new ThermosCook.Routers.AppRouter($(".content"));
+	Backbone.history.start();
+});

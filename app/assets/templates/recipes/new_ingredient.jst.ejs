@@ -1,0 +1,8 @@
+<div class="ingredient control-group" data-i-id="<%= index %>">
+<input type="hidden" name="recipe[ingredients_attributes][<%= index %>][id]" value="<%= ingredient.id %>">
+<input class="amount" type="text" class="form-control" name="recipe[ingredients_attributes][<%= index %>][amount]" placeholder="Amount" value="<%= ingredient.get("amount") %>">
+<input class="unit" type="text" class="form-control" name="recipe[ingredients_attributes][<%= index %>][unit]" placeholder="Unit" value="<%= ingredient.get("unit") %>">
+<input class="name" type="text" class="form-control" name="recipe[ingredients_attributes][<%= index %>][name]" placeholder="Name" value="<%= ingredient.get("name") %>">
+<span class="help-inline" data-i-id="<%= index %>"></span>
+<br>
+</div>

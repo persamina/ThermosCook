@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="errors"></div>
+  <div class="warnings"></div>
+  <div class="successes"></div>
+  <div class="row">
+      <div class="galleria"></div>
+    <div class="recipe-title-description">
+      <h3 class="recipe-title"><%= recipe.get("name") %></h3>
+      <p><%= recipe.get("description") %></p>
+    </div>
+  </div>
+  <div class="row">
+    <h4>Ingredients</h4>
+    <div id="ingredients">
+    </div>
+    <h4>Instructions</h4>
+    <div id="instructions">
+    </div>
+    <% if(recipe.get("user_id") == currentUser.id) { %>
+      <a class="delete-recipe btn btn-primary" href="#">Delete</a>
+      <a class="edit-recipe btn btn-primary" href="#recipes/<%= recipe.id %>/edit">Edit</a>
+    <% } %>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="instruction control-group" data-i-id="<%= index %>">
+<input type="hidden" name="recipe[instructions_attributes][<%= index %>][id]"  value="<%= instruction.get("id") %>">
+<input type="text" name="recipe[instructions_attributes][<%= index %>][description]" placeholder="Description" value="<%= instruction.get("description") %>">
+<br>
+</div>
