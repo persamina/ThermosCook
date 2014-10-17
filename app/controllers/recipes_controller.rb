@@ -3,8 +3,14 @@ class RecipesController < ApplicationController
 
 	def index
 		@recipes = Recipe.includes(:instructions).includes(:ingredients).includes(:recipe_photos)
-    @articles = Article.includes(:article_photos)
-    @user = current_user
+    @articles = Article.includes(:article_photos)  
+    if current_user
+      @user = User.find(current_user.id, :include => [{:recipes => [:instructions, 
+                                                                  :ingredients, 
+                                                                  :recipe_photos]}, 
+                                                     :user_photos])
+    end
+
     puts "AUTHENTICITY TOKEN AUTHENTICITY TOKEN AUTHENTICITY TOKEN AUTHENTICITY TOKEN AUTHENTICITY TOKEN "
     puts form_authenticity_token
 		respond_to do |format|

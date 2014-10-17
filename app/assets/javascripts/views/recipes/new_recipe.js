@@ -49,7 +49,8 @@ ThermosCook.Views.NewRecipe = Backbone.View.extend({
       ThermosCook.recipes.create(this.model, {
         wait: true,
         success: function(recipe) {
-          newRecipeView.model = recipe
+          newRecipeView.model = recipe;
+          ThermosCook.CurrentUser.get("recipes").push([recipe]);
           if(recipe.get("authenticity_token")) {
             ThermosCook.csrfToken = recipe.get("authenticity_token");
             recipe.set("authenticity_token");

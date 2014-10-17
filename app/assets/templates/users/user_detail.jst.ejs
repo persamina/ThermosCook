@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="errors"></div>
+  <div class="warnings"></div>
+  <div class="successes"></div>
+  <div class="row">
+      <h3 class="username"><%= user.get("username") %></h3>
+      <% if( user.get('user_photos').models.length > 0 ) { %>
+        <img class="user-image" src="<%= user.get('user_photos').models[0].get('url') %>">
+      <% } else { %>
+        <img class="user-image" src="portrait_blank.jpg">
+      <% } %>
+  </div>
+  <h3 class="">Recipes</h3>
+  <table class="table table-striped table-condensed table-hover recipes">
+  <thead>
+      <th></th>
+      <th>Name</th>
+      <th>Description</th>
+  </thead>
+  <tbody>
+    <% user.get("recipes").models.forEach(function(recipe){ %>
+    <tr data-href="#recipes/<%= recipe.id %>">
+      <td>
+        <% if( recipe.get('recipe_photos').models.length > 0 ) { %>
+          <img class="small-image" src="<%= recipe.get("recipe_photos").models[0].get("thumbnail_url") %>">
+        <% } else { %>
+          <img class="user-image" src="recipe_placeholder.png">
+        <% } %>
+      </td>
+      <td>
+        <%= recipe.get("name") %> 
+      </td>
+      <td> 
+        <%= recipe.get("description") %> 
+      </td>
+    </tr>
+    <% }); %>
+  
+  </tbody>
+  </table>
+  <div class="row">
+    <% if ( user.id == currentUser.id) { %>
+      <a class="btn btn-primary" href="#">Delete Account</a>
+    <% } %>
+  </div>
+</div>

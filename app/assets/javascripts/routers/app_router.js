@@ -14,6 +14,7 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
 		"recipes/:id/edit": "editRecipe",
 		"recipes/:id/recipe_photos": "editRecipePhotos",
 
+    "user": "showUser",
     "users/sign_in": "signInUser",
     "users/sign_up": "signUpUser",
     "users/user_photo": "editUserPhotos",
@@ -26,6 +27,7 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
 		var recipeIndex = new ThermosCook.Views.RecipeIndex();
     var navButtons = new ThermosCook.Views.NavButtons();
 		this._swapView(recipeIndex.render().$el, navButtons.render().$el);
+    recipeIndex.renderRecipes();
 		Backbone.history.navigate("recipes");
 	},
 
@@ -74,6 +76,13 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
     var navButtons = new ThermosCook.Views.NavButtons();
     this._swapView(editUserPhoto.render().$el, navButtons.render().$el)
     editUserPhoto.setupFUEvents();
+  },
+
+  showUser: function() {
+    var user = ThermosCook.CurrentUser;
+		var showUser = new ThermosCook.Views.UserDetail({model: user});
+    var navButtons = new ThermosCook.Views.NavButtons();
+		this._swapView(showUser.render().$el, navButtons.render().$el);
   },
 
   newArticle: function() {

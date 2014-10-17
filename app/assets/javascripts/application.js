@@ -19,6 +19,7 @@
 //= require jquery.serializejson.min
 //= require galleria-1.4.2.min
 //= require galleria.classic.min
+//= require imagesloaded.pkgd.min
 //= require article_photos
 //= require articles
 //= require bootstrap

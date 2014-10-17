@@ -16,7 +16,12 @@ class SessionsController < Devise::SessionsController
     scope = Devise::Mapping.find_scope!(resource_or_scope)
     resource ||= resource_or_scope
     sign_in(scope, resource) unless warden.user(scope) == resource
-    @user = warden.user 
+    @user = User.find(warden.user.id, :include => [{:recipes => [:instructions, 
+                                                                  :ingredients, 
+                                                                  :recipe_photos]}, 
+                                                     :user_photos])
+
+
     return render "app/views/users/user.rabl"
   end
 

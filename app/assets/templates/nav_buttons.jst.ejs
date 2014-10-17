@@ -1,6 +1,6 @@
 <% if(ThermosCook.CurrentUser.id) { %>
   <div class="nav-buttons">
-    <a href="/#users/user_photo" >
+    <a href="/#user" >
     <% if( ThermosCook.CurrentUser.get('user_photos').models.length > 0 ) { %>
         <img class="nav-user-photo" src="<%= ThermosCook.CurrentUser.get('user_photos').models[0].get("thumbnail_url") %>" >
     <% } else { %>

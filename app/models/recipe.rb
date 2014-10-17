@@ -9,6 +9,7 @@ class Recipe < ActiveRecord::Base
 	has_many :recipe_photos, :dependent => :destroy, :inverse_of => :recipe
 	has_many :ingredients, :dependent => :destroy, :inverse_of => :recipe
 	has_many :instructions, :dependent => :destroy, :inverse_of => :recipe
+  belongs_to :user, :inverse_of => :recipes
 
 	accepts_nested_attributes_for :recipe_photos
 	accepts_nested_attributes_for :ingredients, :reject_if => lambda { |ingredient| ingredient[:name].blank?}

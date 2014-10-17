@@ -46,12 +46,13 @@
 .tile {
   border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+  /* margin: 10px 5px 0px 5px; */
   background: #fff;
   overflow: hidden;
-  margin: 5px;
-  float: left;
-  height: 260px;
+  /* float: left; */
   width: 200px;
+  position: absolute;
+  display: block;
 }
 
 .tile a:hover {
@@ -117,4 +118,28 @@ input.name {
   border-radius: 4px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
   height: 40px;
+}
+
+.user-image{
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
+  height: 100px;
+}
+
+.small-image {
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
+  height: 64px;
+}
+
+.recipes  td:hover {
+  cursor: pointer;
+}
+#recipes {
+  height: 5000px;
+  position: relative;
+}
+
+body {
+  background: #F3F3F3;
 }

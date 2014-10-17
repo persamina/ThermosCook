@@ -38,6 +38,10 @@ ThermosCook.Views.RecipeDetail = Backbone.View.extend({
 			wait: true,
 			success: function(model, response, options) {
         ThermosCook.recipes.remove(this.model);
+        ThermosCook.CurrentUser.get("recipes").remove(model);
+        //var userRecipe = ThermosCook.CurrentUser.get("recipes").findWhere({id: model.id}).remove();
+       
+        //ThermosCook.CurrentUser.get("recipes").remove();
 			}
 		});
     Backbone.history.navigate("recipes", {trigger: true});
