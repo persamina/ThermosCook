@@ -1,10 +1,8 @@
-<a href="/#recipes/<%=recipe.id %>">
+<a href="/#recipes/<%=recipe.id %>" data-recipe-id="<%=recipe.id %>" >
 <div class="tile" 
      id="recipe" 
      data-recipe-id="<%=recipe.id %>" 
-     data-placementId="<%=placementId %>"
-     style="top: <%= positions.topPosition %>px; 
-            left: <%= positions.leftPosition %>px";>
+     data-placementId="<%=placementId %>">
 
   <div>
   <% if(recipe.get("recipe_photos").models.length > 0 ) { %>

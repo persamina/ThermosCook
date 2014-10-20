@@ -9,6 +9,7 @@ ThermosCook.Views.EditRecipePhotos = Backbone.View.extend({
 	},
 
   setupFUEvents: function() {
+    var editRecipePhotosView = this;
     $("#fileupload").bind("fileuploadadd", function(event, data) {
       console.log("added");
     });
@@ -26,6 +27,7 @@ ThermosCook.Views.EditRecipePhotos = Backbone.View.extend({
       var userRecipe = ThermosCook.CurrentUser.get("recipes").findWhere({id: newRecipePhoto.get("recipe_id")});
       sharedRecipe.get("recipe_photos").add([newRecipePhoto]);
       userRecipe.get("recipe_photos").add([newRecipePhoto]);
+      Backbone.history.navigate("recipes/" + editRecipePhotosView.model.id, {trigger: true});
     });
     
   },
