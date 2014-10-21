@@ -11,8 +11,6 @@ class RecipesController < ApplicationController
                                                      :user_photos])
     end
 
-    puts "AUTHENTICITY TOKEN AUTHENTICITY TOKEN AUTHENTICITY TOKEN AUTHENTICITY TOKEN AUTHENTICITY TOKEN "
-    puts form_authenticity_token
 		respond_to do |format|
 			format.json { render :indexRABL }
 			format.html { render :index }
