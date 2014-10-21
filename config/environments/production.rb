@@ -75,5 +75,5 @@ ThermosCook::Application.configure do
 		}
 	}
 
-  config.action_mailer.default_url_options = { :host => "http://www.thermoscook.com" }
+  config.action_mailer.default_url_options = { :host => "thermoscook.herokuapp.com" }
 end
