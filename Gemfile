@@ -43,6 +43,7 @@ gem 'oj'
 gem 'devise'
 
 gem 'letter_opener', :group => :development
+gem 'debugger', :group => :development
 
 #commented out
 #gem 'nokogiri'
@@ -61,4 +62,3 @@ gem 'letter_opener', :group => :development
 # gem 'capistrano'
 
 # To use debugger
-gem 'debugger'
