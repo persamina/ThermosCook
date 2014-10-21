@@ -13,10 +13,8 @@ ThermosCook.Views.EditRecipePhotos = Backbone.View.extend({
   setupFUEvents: function() {
     var editRecipePhotosView = this;
     $("#fileupload").bind("fileuploadadd", function(event, data) {
-      console.log("added");
     });
     $("#fileupload").bind("fileuploadsubmit", function(event, data) {
-      console.log("submitted");
     });
     $("#fileupload").bind("fileuploaddone", function(event, data) {
       var recipePhotoData = data.result.files[0];
