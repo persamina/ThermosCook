@@ -1,11 +1,13 @@
 ThermosCook.Views.EditRecipePhotos = Backbone.View.extend({
 	initialize: function() {
+    this.filesUploaded = false;
 	},
 	template: JST["recipes/edit_recipe_photos"],
 
 	events: {
     "submit .recipe_photos": "submit",
     "click .continue-button": "continueButton",
+    "click #modalYes": "continueWithoutUpload",
 	},
 
   setupFUEvents: function() {
@@ -27,7 +29,7 @@ ThermosCook.Views.EditRecipePhotos = Backbone.View.extend({
       var userRecipe = ThermosCook.CurrentUser.get("recipes").findWhere({id: newRecipePhoto.get("recipe_id")});
       sharedRecipe.get("recipe_photos").add([newRecipePhoto]);
       userRecipe.get("recipe_photos").add([newRecipePhoto]);
-      Backbone.history.navigate("recipes/" + editRecipePhotosView.model.id, {trigger: true});
+      editRecipePhotosView.filesUploaded = true;
     });
     
   },
@@ -40,6 +42,16 @@ ThermosCook.Views.EditRecipePhotos = Backbone.View.extend({
 	},
 	continueButton: function(event) {
     event.preventDefault();
+    if (this.filesUploaded) {
+      Backbone.history.navigate("recipes/" + this.model.id, {trigger: true});
+    } else {
+     $("#photoUploadModal").modal("show"); 
+
+    }
+	},
+	continueWithoutUpload: function(event) {
+    event.preventDefault();
+    $("#photoUploadModal").modal("hide"); 
     Backbone.history.navigate("recipes/" + this.model.id, {trigger: true});
 	},
 

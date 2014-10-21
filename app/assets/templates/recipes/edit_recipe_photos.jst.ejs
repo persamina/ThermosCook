@@ -1,21 +1,16 @@
-<h2><%= recipe.get("name") %></h2>
+<h2><%= recipe.get("name") %> Photos</h2>
 <br>
-<form accept-charset="UTF-8" action="/recipe_photos" class="update_recipe" enctype="multipart/form-data" id="fileupload" method="post">
+<form accept-charset="UTF-8" action="/recipe_photos" enctype="multipart/form-data" id="fileupload" method="post">
   <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
   <input type="hidden" name="recipe_photo[recipe_id]" value="<%= recipe.id %>" >
   <div class="row fileupload-buttonbar">
-    <div class="span7">
+    <div class="span9">
       <!-- The fileinput-button span is used to style the file input field as button -->
       <span class="btn btn-success fileinput-button">
         <i class="icon-plus icon-white"></i>
         <span>Add files...</span>
         <input id="recipe_photo_photo" name="recipe_photo[photo]" type="file">
       </span>
-
-      <button type="submit" class="btn btn-primary no-gradient start">
-        <i class="icon-upload icon-white"></i>
-        <span>Start upload</span>
-      </button>
 
       <button type="reset" class="btn btn-warning cancel">
         <i class="icon-ban-circle icon-white"></i>
@@ -26,8 +21,24 @@
         <i class="icon-trash icon-white"></i>
         <span>Delete</span>
       </button>
-
       <input type="checkbox" class="toggle">
+
+      <!-- The table listing the files available for upload/download -->
+      <table class="table table-striped photo-loader-table">
+        <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
+        </tbody>
+      </table>
+
+      <button type="submit" class="btn btn-primary no-gradient start">
+        <span>Upload Photos</span>
+      </button>
+
+      <br>
+      <a href="" class="btn btn-primary continue-button">
+        <i class="fa fa-arrow-right"/>
+        <span>Continue</span>
+      </a>
+
     </div>
     <div class="span5">
       <!-- The global progress bar -->
@@ -39,22 +50,29 @@
   <!-- The loading indicator is shown during image processing -->
   <div class="fileupload-loading"></div>
   <br>
-  <!-- The table listing the files available for upload/download -->
-  <table class="table table-striped photo-loader-table"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
-  </table>
-  <button type="submit" class="btn btn-primary start no-gradient submit">
-    <span>Upload Photos</span>
-  </button>
-  <a href="" class="btn btn-primary continue-button">
-    <i class="fa fa-arrow-right"/>
-    <span>Continue</span>
-  </a>
-  <br>
 </form>
+
+<!-- Modal -->
+<div id="photoUploadModal" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Continue Without Uploading Photos?</h3>
+  </div>
+  <div class="modal-body">
+      <p>No photos have been uploaded! Click the "Add Files" Button to select the desired photos then hit the "Upload Photos" button to start uploading. </p>  
+      <p>Do you want to continue without uploading?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
+    <button  id="modalYes" class="btn btn-primary" aria-hidden="true">Yes</button>
+  </div>
+</div>
+
 
 <script>
   $("#fileupload").fileupload({
     url: "/recipe_photos",
+    maxNumberOfFiles: 4,
     limitMultiFileUploads: 4,
     limitConcurrentUploads: 4,
     formData: [
