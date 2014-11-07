@@ -22,8 +22,7 @@ class RegistrationsController < Devise::RegistrationsController
         @minimum_password_length = resource_class.password_length.min
       end
       @user = resource
-      @user.includes(:recipes)
-      return render "app/views/registrations/error.rabl"
+      return render "app/views/registrations/error.rabl", :status => :not_acceptable
     end
   end
 

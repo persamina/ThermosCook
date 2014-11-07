@@ -6,11 +6,15 @@
     <h2>New Recipe</h2>
     <div id="photo_loader">
     <form accept-charset="UTF-8" action="/recipes" class="new_recipe" enctype="multipart/form-data" id="fileupload" method="post">
-      <input type="text" name="recipe[name]" placeholder="Name">
-      <br>
+      <div class="name control-group">
+        <input type="text" name="recipe[name]" placeholder="Name">
+        <span class="help-inline"></span>
+      </div>
 
-      <input type="text" name="recipe[description]" placeholder="Description">
-      <br>
+      <div class="description control-group">
+        <input type="text" name="recipe[description]" placeholder="Description">
+        <span class="help-inline"></span>
+      </div>
 
       <h4>Ingredients</h4> <a href="" class="add_ingredient btn btn-primary">Add Ingredient</a>
       <div class="ingredients">

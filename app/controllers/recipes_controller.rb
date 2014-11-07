@@ -2,13 +2,13 @@ class RecipesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
 
 	def index
-		@recipes = Recipe.includes(:instructions).includes(:ingredients).includes(:recipe_photos)
-    @articles = Article.includes(:article_photos)  
+		@recipes = Recipe.includes(:instructions).includes(:ingredients).includes(:recipe_photos).includes(:likes)
+    @articles = Article.includes(:article_photos).includes(:likes)  
     if current_user
       @user = User.find(current_user.id, :include => [{:recipes => [:instructions, 
-                                                                  :ingredients, 
-                                                                  :recipe_photos]}, 
-                                                     :user_photos])
+        :ingredients, 
+        :recipe_photos]}, 
+        :user_photos, :likes])
     end
 
 		respond_to do |format|
@@ -25,9 +25,13 @@ class RecipesController < ApplicationController
 			  format.json { render :showRABL }
 		  end
 		else
-
+      debugger
+      puts @recipe.errors.full_messages
+      return render :error, :status => :not_acceptable
 		end
+
 	end
+
 	def show
 		@recipe = Recipe.find(params[:id])
 		respond_to do |format|
@@ -49,7 +53,6 @@ class RecipesController < ApplicationController
     else
       render 422
     end
-
   end
   
 	def destroy
@@ -58,6 +61,7 @@ class RecipesController < ApplicationController
 			@recipe.destroy
 			render :showRABL
 		else
+      render 401
 		end
 	end
 end

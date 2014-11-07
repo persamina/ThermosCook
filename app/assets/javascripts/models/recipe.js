@@ -7,6 +7,43 @@ ThermosCook.Models.Recipe = Backbone.Model.extend({
 		respAttr.recipe_photos = new ThermosCook.Collections.RecipePhotos(respAttr.recipe_photos);
 		return respAttr;
 	},
+  validation: {
+    name: {
+      required: true
+    },
+    description: {
+      required: true
+    },
+    ingredients_attributes: function(value) {
+      var errors = {"ingredient_errors": {}};
+      if(value) {
+        value.forEach(function(ingredient_attributes, index) {
+          var ingredient = new ThermosCook.Models.Ingredient(ingredient_attributes);
+          if (!ingredient.isValid()) {
+            errors.ingredient_errors[index] = ingredient.validationError;
+          }
+        });
+      }
+      if (!$.isEmptyObject(errors.ingredient_errors)) {
+        return errors;
+      }
+    },
+    instructions_attributes: function(value) {
+      var errors = {"instruction_errors": {}};
+      if(value) {
+        value.forEach(function(instruction_attributes, index) {
+          var instruction = new ThermosCook.Models.Instruction(instruction_attributes);
+          if (!instruction.isValid()) {
+            errors.instruction_errors[index] = instruction.validationError;
+          }
+        });
+      }
+      if (!$.isEmptyObject(errors.instruction_errors)) {
+        return errors;
+      }
+    },
+  },
+  /*
   validate: function(attrs, options) {
     var errors = {"ingredient_errors": {}, "instruction_errors": {}};
 
@@ -32,6 +69,5 @@ ThermosCook.Models.Recipe = Backbone.Model.extend({
       return errors;
     }
   },
-
-
+  */
 });

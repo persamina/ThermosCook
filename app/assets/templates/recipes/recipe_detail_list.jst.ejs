@@ -6,14 +6,14 @@
 
   <div>
   <% if(recipe.get("recipe_photos").models.length > 0 ) { %>
-    <img src="<%= recipe.get("recipe_photos").models[0].get("thumbnail_url") %>"></img>
+    <img src="<%- recipe.get("recipe_photos").models[0].get("thumbnail_url") %>"></img>
   <% } else { %>
     <img src="recipe_placeholder.png"></img>
   <% } %>
   </div>
 
-  <div class="title">
-    <h5><%= recipe.get("name") %></h5>
+  <div class="tile-title">
+    <h5><%- recipe.get("name") %></h5>
   </div>
 </div>
 </a>

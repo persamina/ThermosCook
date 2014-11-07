@@ -3,22 +3,30 @@
   <div class="warnings"></div>
   <div class="successes"></div>
   <div class="row">
-    <h2>Sign Up</h2>
     <form accept-charset="UTF-8" action="/users.json" class="new_user" method="post">
       <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-      <div class="span3">
-        <input type="text" name="user[email]" placeholder="Email">
-        <br>
-        <input type="text" name="user[username]" placeholder="Username">
-        <br>
-        <input type="password" name="user[password]" placeholder="Password">
-        <br>
-        <input type="password" name="user[password_confirmation]" placeholder="Password Confirmation">
-        <br>
+      <div class="span2"></div>
+      <div class="span8">
+        <h2>Sign Up</h2>
+        <div class="email control-group">
+          <input type="text" name="user[email]" placeholder="Email">
+          <span class="help-inline"></span>
+        </div>
+        <div class="username control-group">
+          <input type="text" name="user[username]" placeholder="Username">
+          <span class="help-inline"></span>
+        </div>
+        <div class="password password_confirmation control-group">
+          <input type="password" name="user[password]" placeholder="Password">
+          <span class="help-inline"></span>
+          <div style="margin-bottom: 10px;"></div>
+          <input type="password" name="user[password_confirmation]" placeholder="Password Confirmation">
+        </div>
         <button type="submit" class="btn btn-primary start no-gradient">
           <span>Sign Up!</span>
         </button>
       </div>
+      <div class="span2"></div>
     </form>
   </div>
 </div>

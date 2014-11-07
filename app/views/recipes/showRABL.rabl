@@ -3,6 +3,7 @@ node(:id) {@recipe.id}
 node(:name) {@recipe.name}
 node(:description) {@recipe.description}
 node(:user_id) {@recipe.user_id}
+node(:likes) { @recipe.likes.count }
 child(@recipe.ingredients, :object_root => false) do |ingredient|
 	attributes :id, :name, :amount, :unit
 end

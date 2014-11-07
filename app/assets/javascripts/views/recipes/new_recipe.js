@@ -44,8 +44,9 @@ ThermosCook.Views.NewRecipe = Backbone.View.extend({
     event.preventDefault();
     var newRecipeData = $(event.currentTarget).serializeJSON().recipe;
     this.model = new ThermosCook.Models.Recipe(newRecipeData);
+    Backbone.Validation.bind(this);
 
-    if (this.model.isValid()) {
+    if (this.model.validate() == undefined) {
       ThermosCook.recipes.create(this.model, {
         wait: true,
         success: function(recipe) {
@@ -56,22 +57,19 @@ ThermosCook.Views.NewRecipe = Backbone.View.extend({
             recipe.set("authenticity_token");
           }
           Backbone.history.navigate("/recipes/" + recipe.id + "/recipe_photos", {trigger: true});
-        }
+        },
+        error: function(recipeSession, response) {
+          var errorMessages = response.responseJSON.messages;
+          ThermosCook.Methods.handleErrors(errorMessages);
+          var csrfToken = response.responseJSON.authenticity_token;
+          if (csrfToken && csrfToken.length > 0) 
+          {
+            ThermosCook.csrfToken = csrfToken;
+          }
+        },
       });
     } else {
-      this.handleErrors(this.model.validationError);
-    }
-  },
-  handleErrors: function(validationErrors) {
-    var numberIngredients = $("div.ingredient").length;
-    for(var index=0; index<numberIngredients; index++) {
-      if(validationErrors.ingredient_errors[index]) {
-        $("div.ingredients").find("[data-i-id=" + index + "]").addClass("error");
-        $("span[data-i-id=" + index+ "]").html(validationErrors.ingredient_errors[index]);
-      } else {
-        $("div.ingredients").find("[data-i-id=" + index + "]").removeClass("error");
-        $("span[data-i-id=" + index+ "]").html("");
-      }
+      ThermosCook.Methods.handleErrors(this.model.validate(), true);
     }
   },
 

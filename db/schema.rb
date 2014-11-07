@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141014192750) do
+ActiveRecord::Schema.define(:version => 20141107164234) do
 
   create_table "article_photos", :force => true do |t|
     t.string   "description"
@@ -26,11 +26,14 @@ ActiveRecord::Schema.define(:version => 20141014192750) do
 
   create_table "articles", :force => true do |t|
     t.string   "title"
-    t.text     "body"
+    t.text     "body",       :default => "Edit Article Here!"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.boolean  "pinned",     :default => false
   end
+
+  add_index "articles", ["title"], :name => "index_articles_on_title", :unique => true
 
   create_table "ingredients", :force => true do |t|
     t.string   "name"
@@ -47,6 +50,14 @@ ActiveRecord::Schema.define(:version => 20141014192750) do
     t.integer  "recipe_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "likes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "likeable_id"
+    t.string   "likeable_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "recipe_photos", :force => true do |t|
@@ -67,6 +78,8 @@ ActiveRecord::Schema.define(:version => 20141014192750) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "recipes", ["name"], :name => "index_recipes_on_name", :unique => true
 
   create_table "sessions", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -105,5 +118,6 @@ ActiveRecord::Schema.define(:version => 20141014192750) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["username"], :name => "index_users_on_username", :unique => true
 
 end

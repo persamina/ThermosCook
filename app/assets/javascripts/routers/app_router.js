@@ -20,6 +20,8 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
     "user": "showUser",
 
     "articles/new": "newArticle",
+		"articles/:id": "showArticle",
+		"articles/:id/edit": "editArticle",
 		"articles/:id/article_photos": "editArticlePhotos",
 	},
 
@@ -77,7 +79,7 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
   editUserPhotos: function(id) {
     var editUserPhoto = new ThermosCook.Views.EditUserPhoto({userId: id});
     var navButtons = new ThermosCook.Views.NavButtons();
-    this._swapView(editUserPhoto.render().$el, navButtons.render().$el)
+    this._swapView(editUserPhoto.render().$el, navButtons.render().$el);
     editUserPhoto.setupFUEvents();
   },
 
@@ -91,8 +93,23 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
   newArticle: function() {
     var newArticle = new ThermosCook.Views.NewArticle();
     var navButtons = new ThermosCook.Views.NavButtons();
-    this._swapView(newArticle.render().$e, navButtons.render().$ell)
+    this._swapView(newArticle.render().$el, navButtons.render().$el);
   },
+
+	showArticle: function(id) {
+		var article = ThermosCook.articles.get(id);
+		var articleDetail = new ThermosCook.Views.ArticleDetail({model: article});
+    var navButtons = new ThermosCook.Views.NavButtons();
+		this._swapView(articleDetail.render().$el, navButtons.render().$el);
+	},
+
+	editArticle: function(id) {
+		var article = ThermosCook.articles.get(id);
+		var editArticle = new ThermosCook.Views.EditArticle({model: article});
+    var navButtons = new ThermosCook.Views.NavButtons();
+		this._swapView(editArticle.render().$el, navButtons.render().$el);
+    editArticle.setupCKEditor();
+	},
 
   editArticlePhotos: function(id) {
 		var article = ThermosCook.articles.get(id);
@@ -111,7 +128,7 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
     
 		this.$rootEl.html(view);
 		this.$navButtons.html(navButtons);
-	}
+	},
 
 
 });

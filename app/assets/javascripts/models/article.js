@@ -5,6 +5,11 @@ ThermosCook.Models.Article= Backbone.Model.extend({
 		respAttr.article_photos = new ThermosCook.Collections.ArticlePhotos(respAttr.article_photos);
 		return respAttr;
 	},
+  validation: {
+    title: {
+      required: true,
+    }
+  },
 
 
 });

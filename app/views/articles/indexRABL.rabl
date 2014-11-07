@@ -1,5 +1,6 @@
 collection @articles, :object_root => false 
-  attributes :id, :title, :body
+  attributes :id, :title, :body, :pinned
+  node(:likes) { |article| article.likes.count }
   child(:article_photos, :object_root => false) do |article_photo|
     attributes :id, :description
     node(:url) { |article_photo| article_photo.photo.url(:original)}

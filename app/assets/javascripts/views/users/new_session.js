@@ -35,8 +35,9 @@ ThermosCook.Views.NewSession= Backbone.View.extend({
         }
       },
       error: function(userSession, response) {
-        console.log("ERROR");
-        console.log(userSession);
+        ThermosCook.Methods.clearFormErrors();
+        var message = "Incorrect username or password!";
+        ThermosCook.Dispatcher.trigger("newErrorMessage", {messages: [message]});
       }
     });
     

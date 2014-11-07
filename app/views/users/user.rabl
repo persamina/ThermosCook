@@ -30,5 +30,14 @@ child(@user.recipes, :object_root => false) do |recipe|
   end
 
 end
+child(@user.likes, :object_root => false) do |like|
+  node(:id) { |like| like.id }
+  node(:user_id) { |like| like.user_id }
+  node(:likeable_id) { |like| like.likeable_id }
+  node(:likeable_type) { |like|  like.likeable_type}
+  node(:recipe_id, :if => lambda { |m| m.likeable_type == "Recipe"}) { |like| like.likeable_id }
+  node(:article_id, :if => lambda { |m|  m.likeable_type == "Article"}) { |like| like.likeable_id }
+  
+end
 node(:authenticity_token) { |m| form_authenticity_token }
 

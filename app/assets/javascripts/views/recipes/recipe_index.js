@@ -2,51 +2,62 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
 	initialize: function() {
 		this.listenTo(ThermosCook.recipes, "add change", this.render);
 		this.listenTo(ThermosCook.recipes, "remove", this.removeRecipe);
-		this.listenTo(ThermosCook.recipes, "newSuccessMessage", this.newSuccessMessage);
 	},
 	template: JST["recipes/index"],
 	recipeTemplate: JST["recipes/recipe_detail_list"],
+  articleTemplate: JST["articles/article_detail_list"],
 	
 
 	render: function() {
 		var recipeIndex = this;
 		var renderedContent = this.template({currentUser: ThermosCook.CurrentUser});
 		this.$el.html(renderedContent);
-		this.$("#recipes").empty();
+		this.$("#tiles").empty();
+
+    var tilesPinned = 0;
+    ThermosCook.pinnedArticles.each(function(article, index) {
+      var articleRenderedContent = recipeIndex.articleTemplate(
+        {article: article,
+         placementId: tilesPinned
+        }
+      );
+			recipeIndex.$(".row#tiles").append(articleRenderedContent);
+      $(recipeIndex.$(".row#tiles").children()[index]).hide()
+      tilesPinned++;
+    });
 
 		ThermosCook.recipes.each(function(recipe, index) {
 			var recipeRenderedContent = recipeIndex.recipeTemplate(
         {recipe: recipe,
-         placementId: index 
+         placementId: tilesPinned
         }
       );
-			recipeIndex.$(".row#recipes").append(recipeRenderedContent);
-      $(recipeIndex.$(".row#recipes").children()[index]).hide()
+			recipeIndex.$(".row#tiles").append(recipeRenderedContent);
+      $(recipeIndex.$(".row#tiles").children()[index]).hide()
+      tilesPinned++;
 		});
 
-
-    this.$(".row#recipes").imagesLoaded(function() {
-      recipeIndex.positionRecipes();
+    this.$(".row#tiles").imagesLoaded(function() {
+      recipeIndex.positionTiles();
     });
-
 
 		return this;
 	},
   removeRecipe: function(data) {
     $("a[data-recipe-id='"+ data.id +"']").remove();
-    this.positionRecipes();
+    this.positionTiles();
   },
-  positionRecipes: function() {
+  positionTiles: function() {
     var recipeIndex = this;
     var totalHorizontalMargin = 10;
     var totalVerticalMargin = 10;
     var numberPlaced = 0;
-    var numberPerRow = Math.floor($("#recipes").width()/(200 + totalHorizontalMargin));
-    var numberToPlace = $("#recipes").children().length;
+    var numberPerRow = Math.floor($("#tiles").width()/(200 + totalHorizontalMargin));
+    var numberToPlace = $("#tiles").children().length;
     var lowestPosition = new Array(numberPerRow);
 
 
-    $("#recipes").children().each(function(index, tile) {
+    $("#tiles").children().each(function(index, tile) {
       var lPIndex = numberPlaced % (numberPerRow);
 
       var positions = {
@@ -74,14 +85,5 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
     });
 
   },
-
-	newSuccessMessage: function(options) {
-   console.log("new success message");
-     var renderedSuccesses = ThermosCook.Store.addSuccessesTemplate({
-      successes: options.messages
-    });
-    this.$el.find(".successes").html(renderedSuccesses);
-  },
-  
 
 });

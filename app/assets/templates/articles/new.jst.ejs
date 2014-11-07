@@ -1,7 +1,19 @@
-<h2>New Article</h2>
-<form accept-charset="UTF-8" action="/articles" class="new_article" enctype="multipart/form-data" id="fileupload" method="post">
-	<input type="text" name="article[title]" placeholder="Name">
-	<br>
-
-  <input class="btn btn-primary create_article" type="submit" value="Continue"/>
-</form>
+<div class="container">
+  <div class="errors"></div>
+  <div class="warnings"></div>
+  <div class="successes"></div>
+  <div class="row">
+    <div class="span2"></div>
+    <div class="span8">
+      <h2>New Article</h2>
+      <form accept-charset="UTF-8" action="/articles" class="new_article" enctype="multipart/form-data" id="fileupload" method="post">
+        <div class="title control-group">
+          <input type="text" name="article[title]" placeholder="Title">
+          <span class="help-inline"></span>
+        </div>
+        <input class="btn btn-primary create_article" type="submit" value="Continue"/>
+      </form>
+    </div>
+    <div class="span2"></div>
+  </div>
+</div>

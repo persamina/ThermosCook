@@ -1,5 +1,12 @@
 ThermosCook::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
+    #namespace :mercury do
+      #resources :images
+    #end
+
+
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'} 
   devise_scope :user do 
     get "users/:id/showJFU", to: "registrations#showJFU"
@@ -15,9 +22,11 @@ ThermosCook::Application.routes.draw do
 	resources :ingredients, :only => [:create, :update, :destroy]
 	resources :recipe_photos, :only => [:create, :destroy, :show]
 	resources :user_photos, :only => [:create, :destroy, :show]
+	resources :likes, :only => [:create, :destroy]
   
   resources :articles, :only => [:index, :show, :create, :update, :destroy]
 	resources :article_photos, :only => [:create, :update, :destroy, :show]
+  post "articles/:article_id/article_photo", to: "article_photos#ckeditor_create"
 
 	root to: "recipes#index"
   # The priority is based upon order of creation:

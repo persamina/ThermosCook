@@ -5,11 +5,18 @@
   <div class="row">
       <div class="galleria"></div>
     <div class="recipe-title-description">
-      <h3 class="recipe-title"><%= recipe.get("name") %></h3>
-      <p><%= recipe.get("description") %></p>
+      <h3 class="recipe-title"><%- recipe.get("name") %></h3>
+      <p><%- recipe.get("description") %></p>
     </div>
   </div>
   <div class="row">
+    <div id="like">
+      <% if (currentUser.get('likes').findWhere({recipe_id: recipe.id})) { %>
+        <a href="#" class="btn btn-primary like-button"><i class="fa fa-heart color-red"></i> Liked</a>
+      <% } else { %>
+        <a href="#" class="btn btn-primary like-button"><i class="fa fa-heart"></i> Like</a>
+      <% } %>
+    </div>
     <h4>Ingredients</h4>
     <div id="ingredients">
     </div>

@@ -17,15 +17,15 @@ class SessionsController < Devise::SessionsController
     resource ||= resource_or_scope
     sign_in(scope, resource) unless warden.user(scope) == resource
     @user = User.find(warden.user.id, :include => [{:recipes => [:instructions, 
-                                                                  :ingredients, 
-                                                                  :recipe_photos]}, 
-                                                     :user_photos])
-
+      :ingredients, 
+      :recipe_photos]}, 
+      :user_photos, :likes])
 
     return render "app/views/users/user.rabl"
   end
 
   def failure
+    puts "error"
     return render :json => {:success => false, :errors => ["Login failed."]}
   end
 end

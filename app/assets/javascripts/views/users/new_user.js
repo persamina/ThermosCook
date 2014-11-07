@@ -17,28 +17,40 @@ ThermosCook.Views.NewUser = Backbone.View.extend({
 
     var newUserData = $(event.currentTarget).serializeJSON();
 
-    this.model = new ThermosCook.Models.User(newUserData);
+    this.model = new ThermosCook.Models.User(newUserData.user);
+    this.model.set(newUserData);
+    Backbone.Validation.bind(this);
 
     
-    Backbone.sync("create", this.model, {
-      success: function(userSession, response) {
-        if (userSession.user) {
-          var message = "a confirmation email was sent check your email to confirm account and log in.";
-          ThermosCook.recipes.trigger("newSuccessMessage", {messages: [message]});
+    if (this.model.validate() == undefined) 
+    {
+      this.model.save({}, {
+        success: function(userSession, response) {
+          if (userSession.get("user")) {
+            var message = "a confirmation email was sent check your email to confirm account and log in.";
+            ThermosCook.Dispatcher.trigger("newSuccessMessage", {messages: [message]});
 
-          if(userSession.user.authenticity_token) {
-            ThermosCook.csrfToken = userSession.user.authenticity_token;
-            userSession.user.authenticity_token= "";
+            if(userSession.get("user").authenticity_token) {
+              ThermosCook.csrfToken = userSession.get("user").authenticity_token;
+              userSession.get("user").authenticity_token= "";
+            }
+            Backbone.history.navigate("#recipes", {trigger: true});
           }
-        }
-      },
-      error: function(userSession, response) {
-        console.log("ERROR");
-        console.log(userSession);
-        console.log(response);
-      },
-    });
-    Backbone.history.navigate("#recipes", {trigger: true});
+        },
+        error: function(userSession, response) {
+          var errorMessages = response.responseJSON.messages;
+          ThermosCook.Methods.handleErrors(errorMessages);
+          var csrfToken = response.responseJSON.authenticity_token;
+          if (csrfToken && csrfToken.length > 0) 
+          {
+            ThermosCook.csrfToken = csrfToken;
+          }
+        },
+      });
+    } else {
+      var errorMessages = this.model.validate()
+      ThermosCook.Methods.handleErrors(errorMessages, true);
+    }
     
-	}
+	},
 });

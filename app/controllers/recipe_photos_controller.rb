@@ -1,4 +1,5 @@
 class RecipePhotosController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
   def show
     @recipe_photo = RecipePhoto.find(params[:id])
     if @recipe_photo

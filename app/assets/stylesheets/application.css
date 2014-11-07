@@ -12,5 +12,13 @@
  *= require jquery.fileupload-ui
  $= require galleria.classic
  *= require font-awesome
- *= require_tree .
+ *= require article_photos
+ *= require articles
+ *= require bootstrap_and_overrides
+ *= require ingredients
+ *= require instructions
+ *= require recipe_photos
+ *= require recipes
+ *= require sessions
+ *= require user_photos
  */

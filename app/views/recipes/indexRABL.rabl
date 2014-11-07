@@ -1,5 +1,6 @@
 collection @recipes, :object_root => false 
   attributes :id, :name, :description, :user_id
+  node(:likes) { |recipe| recipe.likes.count }
   child(:ingredients, :object_root => false) { attributes :id, :name, :amount, :unit } 
   child(:instructions, :object_root => false) { attributes :id, :description }
   child(:recipe_photos, :object_root => false) do |recipe_photo|

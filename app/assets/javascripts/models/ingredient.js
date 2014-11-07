@@ -1,15 +1,7 @@
 ThermosCook.Models.Ingredient = Backbone.Model.extend({
 	urlRoot: "/ingredients",
   validate: function(attrs, options) {
-    if (attrs.amount == "") 
-    {
-      return;
-    }
-    if ($.isNumeric(attrs.amount)) 
-    {
-      return;
-    }
-    if(this.isFraction(attrs.amount))
+    if (attrs.amount == "" || $.isNumeric(attrs.amount) || this.isFraction(attrs.amount)) 
     {
       return;
     }
