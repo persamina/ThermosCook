@@ -20,7 +20,7 @@ gem 'jquery-fileupload-rails'
 gem 'figaro'
 
 # wysiwyg text editor
-#gem 'ckeditor'
+gem 'ckeditor'
 
 # Gems used only for assets and not required
 # in production environments by default.
