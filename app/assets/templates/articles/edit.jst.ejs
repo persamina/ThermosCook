@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="errors"></div>
+  <div class="warnings"></div>
+  <div class="successes"></div>
+  <div class="row">
+    <h2><%- article.get("title") %></h2>
+    <form action="/articles/<%= article.id %>" method="POST" >
+      <input type="hidden" name="_method" value="PUT" />
+      <input type="hidden" name="authenticity_token" value="<%= ThermosCook.csrfToken %>" />
+      <input type="hidden" name="article[id]" value="<%= article.id %>"/>
+      <textarea name="article[body]" id="article_editor" >
+        <%= article.get("body") %>
+      </textarea>
+    </form>
+  </div>
+</div>

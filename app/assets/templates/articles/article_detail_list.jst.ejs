@@ -1,0 +1,19 @@
+<a href="/#articles/<%=article.id %>" data-article-id="<%=article.id %>" >
+<div class="tile" 
+     id="article" 
+     data-article-id="<%=article.id %>" 
+     data-placementId="<%=placementId %>">
+
+  <div>
+  <% if(article.get("article_photos").models.length > 0 ) { %>
+    <img src="<%- article.get("article_photos").models[0].get("thumbnail_url") %>"></img>
+  <% } else { %>
+    <img src="article_placeholder.png"></img>
+  <% } %>
+  </div>
+
+  <div class="tile-title">
+    <h5><%- article.get("title") %></h5>
+  </div>
+</div>
+</a>
