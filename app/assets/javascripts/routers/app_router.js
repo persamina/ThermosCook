@@ -108,7 +108,9 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
 		var editArticle = new ThermosCook.Views.EditArticle({model: article});
     var navButtons = new ThermosCook.Views.NavButtons();
 		this._swapView(editArticle.render().$el, navButtons.render().$el);
-    editArticle.setupCKEditor();
+    //load ckeditor js file then setupCKEditor
+    $.getScript("assets/ckeditor/init", function() {editArticle.setupCKEditor();})
+    //editArticle.setupCKEditor();
 	},
 
   editArticlePhotos: function(id) {

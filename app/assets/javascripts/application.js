@@ -22,7 +22,6 @@
 //= require backbone-validation-min
 //= require jquery.serializejson.min
 //= require imagesloaded.pkgd.min
-//= require ckeditor/init
 //= require article_photos
 //= require articles
 //= require bootstrap
