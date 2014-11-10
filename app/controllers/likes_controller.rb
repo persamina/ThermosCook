@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
   before_filter :load_likeable, :except => [:destroy]
+  before_filter :authenticate_user!
   def create
     @like = @likeable.likes.new(params[:like])
     @like.user_id = current_user.id

@@ -14,6 +14,18 @@ ThermosCook.Views.EditArticle= Backbone.View.extend({
 
     var article_editor = CKEDITOR.replace("article_editor", {
       filebrowserUploadUrl: "/articles/" + this.model.id + "/article_photo",
+      toolbar: [
+        ["Source", "Save", "Templates"],
+        ["Cut", "Copy", "Paste", "Find", "Replace"],
+        ["Bold", "Italic", "Underline", "-", "RemoveFormat"],
+        ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock",],
+        ["NumberedList", "BulletedList",
+         "Outdent", "Indent", "Blockquote", "Link","Unlink","Anchor" ],
+        [ "Image", "Table", "-", "Maximize", "ShowBlocks", "-","About"  ],
+        "/",
+        ["Format"]
+      
+      ],
     });
 
     //once ckeditor has fully loaded

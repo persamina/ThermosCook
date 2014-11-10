@@ -28,7 +28,6 @@ ThermosCook.Views.ArticleDetail = Backbone.View.extend({
 	},
 	likeArticle: function(event) {
     event.preventDefault();
-    console.log("article liked!");
     var userLike =ThermosCook.CurrentUser.get("likes").findWhere({article_id: this.model.id});
     if(!userLike) {
       var like = new ThermosCook.Models.Like({"article_id": this.model.id});
@@ -44,6 +43,8 @@ ThermosCook.Views.ArticleDetail = Backbone.View.extend({
           $(".like-button").html("<i class='fa fa-heart color-red'></i> Liked");
         },
         error: function(model, response, options) {
+          var message = "Sign in so we can remember what you liked!";
+          ThermosCook.Dispatcher.trigger("newErrorMessage", {messages: [message]});
           console.log("error liking!");
         }
       });
