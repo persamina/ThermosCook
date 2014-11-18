@@ -1,15 +1,18 @@
 ThermosCook.Views.NewRecipe = Backbone.View.extend({
 	initialize: function() {
+    this.recipeTaggings;
 	},
 	template: JST["recipes/new"],
 	photoLoaderTemplate: JST["recipes/photo_loader"],
 	newIngredientTemplate: JST["recipes/new_ingredient"],
 	newInstructionTemplate: JST["recipes/new_instruction"],
+  taggingsTemplate: JST["taggings/select_taggings"],
 
 	events: {
 		"click .add_ingredient": "addNewIngredient",
 		"click .add_instruction": "addNewInstruction",
     "submit .new_recipe": "submit",
+    "click .create_tagging": "submitTagging",
 	},
 	render: function() {
 		var renderedContent = this.template();
@@ -38,6 +41,20 @@ ThermosCook.Views.NewRecipe = Backbone.View.extend({
 		var instructionRenderedContent = this.newInstructionTemplate({index: index, instruction: instruction});
 		$(".instructions").append(instructionRenderedContent);
 	},
+  getTaggings: function() {
+    var newRecipeView = this;
+    ThermosCook.recipeTaggings.fetch({
+      success: function() {
+        newRecipeView.addTaggings();
+      }
+    });
+
+    
+  },
+  addTaggings: function() {
+    var taggingsRenderedContent = this.taggingsTemplate({taggings: ThermosCook.recipeTaggings});
+    $(".taggings").html(taggingsRenderedContent);
+  },
 
   submit: function(event) {
     var newRecipeView = this;
@@ -73,4 +90,29 @@ ThermosCook.Views.NewRecipe = Backbone.View.extend({
     }
   },
 
+  submitTagging: function(event) {
+    var newRecipeView = this;
+    event.preventDefault();
+    var newTaggingData = $("form").serializeJSON().tagging;
+    this.model = new ThermosCook.Models.Tagging(newTaggingData);
+    Backbone.Validation.bind(this);
+    ThermosCook.recipeTaggings.create(this.model, {
+      wait: true,
+      success: function(tagging) {
+        newRecipeView.addTaggings();
+        $("#tagging_name").val("");
+        if(tagging.get("authenticity_token")) {
+          ThermosCook.csrfToken = tagging.get("authenticity_token");
+          tagging.set("authenticity_token");
+        }
+      },
+      error: function(recipeSession, response) {
+        var csrfToken = response.responseJSON.authenticity_token;
+        if (csrfToken && csrfToken.length > 0) 
+        {
+          ThermosCook.csrfToken = csrfToken;
+        }
+      },
+    });
+  },
 });

@@ -10,6 +10,8 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
 
 		"recipes": "recipeIndex",
 		"recipes/new": "newRecipe",
+		"recipes/search": "recipeSearchIndex",
+		"recipes/tagging/:id": "recipeByTagging",
 		"recipes/:id": "showRecipe",
 		"recipes/:id/edit": "editRecipe",
 		"recipes/:id/recipe_photos": "editRecipePhotos",
@@ -26,20 +28,41 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
 	},
 
 	recipeIndex: function() {
-		var recipeIndex = new ThermosCook.Views.RecipeIndex();
+		var recipeIndex = new ThermosCook.Views.RecipeIndex({ collection: ThermosCook.recipes });
     var navButtons = new ThermosCook.Views.NavButtons();
 		this._swapView(recipeIndex.render().$el, navButtons.render().$el);
-    //$(".row #recipes").imagesLoaded(function() {
-    //  recipeIndex.positionRecipes();
-    //});
-    //recipeIndex.renderRecipes();
 		Backbone.history.navigate("recipes");
+    recipeIndex.addTaggings();
+	},
+	recipeSearchIndex: function() {
+		var recipeIndex = new ThermosCook.Views.RecipeIndex({ collection: ThermosCook.recipeSearchResults});
+    var navButtons = new ThermosCook.Views.NavButtons();
+		this._swapView(recipeIndex.render().$el, navButtons.render().$el);
+    recipeIndex.addTaggings();
+	},
+
+  recipeByTagging: function(id) {
+    var appRouter = this;
+    var taggingRecipes = new ThermosCook.Collections.Recipes();
+    taggingRecipes.url = "recipes/tagging/"+id;
+    taggingRecipes.fetch({
+      success: function(response) {
+        var recipeIndex = new ThermosCook.Views.RecipeIndex( {collection: taggingRecipes} );
+        var navButtons = new ThermosCook.Views.NavButtons();
+        appRouter._swapView(recipeIndex.render().$el, navButtons.render().$el);
+        recipeIndex.addTaggings();
+      },
+      error: function(response) {
+
+      }
+    });
 	},
 
 	newRecipe: function() {
 		var newRecipe = new ThermosCook.Views.NewRecipe();
     var navButtons = new ThermosCook.Views.NavButtons();
 		this._swapView(newRecipe.render().$el, navButtons.render().$el);
+    newRecipe.addTaggings();
 	},
 
 	showRecipe: function(id) {

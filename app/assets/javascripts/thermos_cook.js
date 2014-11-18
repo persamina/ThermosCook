@@ -96,7 +96,6 @@ window.ThermosCook = {
     // http://blog.softr.li/post/43146401263/finally-correctly-dealing-with-rails-csrf-protection
     // http://ngauthier.com/2011/02/backbone-and-rails-forgery-protection.html
     Backbone.sync = function(method, model, options) {
-      console.log("custom sync");
       /* only need a token for non-get requests */
       if (method == 'create' || method == 'update' || method == 'delete') {
         /* grab the token from the meta tag rails embeds */
@@ -110,6 +109,8 @@ window.ThermosCook = {
         /* set it as a model attribute without triggering events */
         model.set(auth_options, {silent: true});
       }
+
+      
       /* proxy the call to the old sync method */
       return Backbone._sync(method, model, options);
     }
@@ -120,6 +121,7 @@ window.ThermosCook = {
 $(document).ready(function(){
   ThermosCook.initialize();
   var recipeData;
+  var taggingsData;
   var articleData;
   var userData;
   if($("#recipes-data").length > 0) {
@@ -131,6 +133,7 @@ $(document).ready(function(){
     articleData = JSON.parse($("#articles-data").html());
   }
   ThermosCook.articles= new ThermosCook.Collections.Articles(articleData, {parse: true});
+
   var pinnedArticles = ThermosCook.articles.where({pinned: true});
   ThermosCook.pinnedArticles = new ThermosCook.Collections.Articles(pinnedArticles);
 
@@ -140,6 +143,11 @@ $(document).ready(function(){
     }
     ThermosCook.CurrentUser = new ThermosCook.Models.User(userData, {parse: true});
   }
+
+  if($("#taggings-data").length > 0) {
+    taggingsData= JSON.parse($("#taggings-data").html());
+  }
+  ThermosCook.recipeTaggings= new ThermosCook.Collections.RecipeTaggings(taggingsData, {parse: true});
 
   new ThermosCook.Routers.AppRouter($(".content"), $(".nav-buttons"));
   Backbone.history.start();

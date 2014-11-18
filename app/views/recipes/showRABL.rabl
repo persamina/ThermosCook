@@ -2,6 +2,8 @@ object false
 node(:id) {@recipe.id}
 node(:name) {@recipe.name}
 node(:description) {@recipe.description}
+node(:prep_time) {@recipe.prep_time}
+node(:cook_time) {@recipe.cook_time}
 node(:user_id) {@recipe.user_id}
 node(:likes) { @recipe.likes.count }
 child(@recipe.ingredients, :object_root => false) do |ingredient|
@@ -19,6 +21,9 @@ child(@recipe.recipe_photos, :object_root => false) do |recipe_photo|
   node(:size) { |recipe_photo| recipe_photo.photo_file_size }
   node(:delete_url) { |recipe_photo| recipe_photo_url(recipe_photo) }
   node(:delete_type) { |recipe_photo| "DELETE" }
+end
+child(@recipe.taggings, :object_root => false) do |tagging|
+  attributes :id, :name, :type_class
 end
 
 node(:authenticity_token) { form_authenticity_token}

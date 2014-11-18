@@ -140,7 +140,8 @@ input.name {
 }
 #tiles {
   position: relative;
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 body {
@@ -148,4 +149,40 @@ body {
 }
 .color-red {
   color: red;
+}
+div.tagging {
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
+  float: left;
+  margin: 5px;
+  background: #FFF;
+}
+.tagging label {
+  padding: 3px;
+  margin: 0px;
+  position: relative;
+}
+.tagging input{
+  margin: 0px;
+}
+.taggings {
+  margin: 10px 0px;
+  width: 500px;
+}
+input[type='checkbox'] {
+  display: none;
+}
+input[type="checkbox"] + span:before {
+  font-family: 'FontAwesome';
+  padding-right: 3px;
+  font-size: 16px;
+  vertical-align: middle;
+}
+input[type="checkbox"] + span:before {
+  vertical-align: middle;
+  content: "\f096"; /* check-empty */
+}
+input[type="checkbox"]:checked + span:before {
+  vertical-align: middle;
+  content: "\f046"; /* check */
 }

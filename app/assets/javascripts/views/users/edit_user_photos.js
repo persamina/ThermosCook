@@ -13,6 +13,7 @@ ThermosCook.Views.EditUserPhoto= Backbone.View.extend({
 	},
   setupFUEvents: function() {
 		var editUserPhotoView= this;
+    
     //$("#fileupload").bind("fileuploadadd", function(event, data) {
       //console.log("added");
     //});

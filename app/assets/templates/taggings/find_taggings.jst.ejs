@@ -1,0 +1,15 @@
+<% taggings.forEach(function(tagging, index) { %>
+  <div class="tagging">
+    <label for="<%= index %>">
+      <input id="<%= index %>" 
+             type="checkbox" 
+             name="tagging_ids[]" 
+             value="<%= tagging.id %>"
+             <% if (ThermosCook.recipeSearchResults && ThermosCook.recipeSearchResults.tagging_ids.indexOf(tagging.id.toString()) != -1) { %>
+                checked
+             <% } %>
+      >
+      <span><%- tagging.get("name") %></span>
+    </label>
+  </div>
+<% }); %>

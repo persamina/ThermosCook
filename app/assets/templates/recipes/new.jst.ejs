@@ -2,10 +2,15 @@
   <div class="errors"></div>
   <div class="warnings"></div>
   <div class="successes"></div>
-  <div class="row">
-    <h2>New Recipe</h2>
-    <div id="photo_loader">
-    <form accept-charset="UTF-8" action="/recipes" class="new_recipe" enctype="multipart/form-data" id="fileupload" method="post">
+
+  <form accept-charset="UTF-8" 
+        action="/recipes" 
+        class="new_recipe" 
+        enctype="multipart/form-data" 
+        method="post"
+    >
+    <div class="row">
+      <h2>New Recipe</h2>
       <div class="name control-group">
         <input type="text" name="recipe[name]" placeholder="Name">
         <span class="help-inline"></span>
@@ -16,6 +21,27 @@
         <span class="help-inline"></span>
       </div>
 
+      <div class="prep_time control-group">
+        <input type="text" name="recipe[prep_time]" placeholder="Prep Time">
+        <span class="help-inline"></span>
+      </div>
+
+      <div class="cook_time control-group">
+        <input type="text" name="recipe[cook_time]" placeholder="Cook Time">
+        <span class="help-inline"></span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="recipe-title-description"><h4>Select Tags</h4></div>
+      <div class="new_tagging">
+        <input type="hidden" name="tagging[type_class]" value="Recipe">
+        <input id="tagging_name" class="unit" type="text" name="tagging[name]" placeholder="New Tag Name">
+        <a href="#" class="btn btn-primary create_tagging">Create</a>
+      </div>
+      <div class="taggings">
+      </div>
+    </div>
+    <div class="row">
       <h4>Ingredients</h4> <a href="" class="add_ingredient btn btn-primary">Add Ingredient</a>
       <div class="ingredients">
       </div>
@@ -25,6 +51,6 @@
       </div>
 
       <input class="btn btn-primary create_recipe" type="submit" value="Create and Add Photos"/>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

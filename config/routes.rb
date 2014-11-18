@@ -17,12 +17,23 @@ ThermosCook::Application.routes.draw do
 
 	resources :recipes, :only => [:index, :show, :create, :update, :destroy] do 
     get :showJFU
+    get "taggings/:id", to: "recipes#taggingsIndex", on: :collection
+    get "search", to: "recipes#taggingsSearch", on: :collection
+
   end
 	resources :instructions, :only => [:create, :update, :destroy]
 	resources :ingredients, :only => [:create, :update, :destroy]
 	resources :recipe_photos, :only => [:create, :destroy, :show]
 	resources :user_photos, :only => [:create, :destroy, :show]
 	resources :likes, :only => [:create, :destroy]
+	resources :tags, :only => [:create, :destroy] do
+  end
+	resources :taggings, :only => [:create, :destroy] do
+    collection do
+      get :recipe_taggings
+      get :article_taggings
+    end
+  end
   
   resources :articles, :only => [:index, :show, :create, :update, :destroy]
 	resources :article_photos, :only => [:create, :update, :destroy, :show]

@@ -1,5 +1,5 @@
 collection @recipes, :object_root => false 
-  attributes :id, :name, :description, :user_id
+  attributes :id, :name, :description, :user_id, :prep_time, :cook_time
   node(:likes) { |recipe| recipe.likes.count }
   child(:ingredients, :object_root => false) { attributes :id, :name, :amount, :unit } 
   child(:instructions, :object_root => false) { attributes :id, :description }
@@ -12,4 +12,7 @@ collection @recipes, :object_root => false
     node(:size) { |recipe_photo| recipe_photo.photo_file_size }
     node(:delete_url) { |recipe_photo| recipe_photo_url(recipe_photo) }
     node(:delete_type) { |recipe_photo| "DELETE" }
+  end
+  child(:taggings, :object_root => false) do |tagging|
+    attributes :id, :name, :type_class
   end

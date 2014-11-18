@@ -5,4 +5,6 @@ class Article < ActiveRecord::Base
 
   has_many :article_photos, :dependent => :destroy, :inverse_of => :article
   has_many :likes, as: :likeable, :dependent => :destroy, :inverse_of => :likeable
+  has_many :tags, as: :tagable, :dependent => :destroy, :inverse_of => :tagable
+  has_many :taggings, through: :tags, source: :tagging
 end

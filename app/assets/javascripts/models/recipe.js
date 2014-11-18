@@ -5,6 +5,7 @@ ThermosCook.Models.Recipe = Backbone.Model.extend({
 		respAttr.ingredients = new ThermosCook.Collections.Ingredients(respAttr.ingredients);
 		respAttr.instructions = new ThermosCook.Collections.Instructions(respAttr.instructions);
 		respAttr.recipe_photos = new ThermosCook.Collections.RecipePhotos(respAttr.recipe_photos);
+		respAttr.taggings = new ThermosCook.Collections.RecipeTaggings(respAttr.taggings);
 		return respAttr;
 	},
   validation: {
@@ -13,6 +14,12 @@ ThermosCook.Models.Recipe = Backbone.Model.extend({
     },
     description: {
       required: true
+    },
+    prep_time: {
+      pattern: "number"
+    },
+    cook_time: {
+      pattern: "number"
     },
     ingredients_attributes: function(value) {
       var errors = {"ingredient_errors": {}};

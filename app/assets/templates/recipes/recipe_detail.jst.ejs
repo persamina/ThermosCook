@@ -7,6 +7,8 @@
     <div class="recipe-title-description">
       <h3 class="recipe-title"><%- recipe.get("name") %></h3>
       <p><%- recipe.get("description") %></p>
+      <p><%= recipe.get("cook_time")%></p>
+      <p><%= recipe.get("prep_time")%></p>
     </div>
   </div>
   <div class="row">
@@ -27,5 +29,15 @@
       <a class="delete-recipe btn btn-primary" href="#">Delete</a>
       <a class="edit-recipe btn btn-primary" href="#recipes/<%= recipe.id %>/edit">Edit</a>
     <% } %>
+  </div>
+  <div class="row">
+    <h4>Tags</h4>
+    <div class="taggings">
+      <% recipe.get("taggings").forEach(function(tagging) { %>
+        <div class="tagging">
+          <span><%- tagging.get("name") %></span>
+        </div>
+      <% }); %>
+    </div>
   </div>
 </div>

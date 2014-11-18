@@ -1,0 +1,12 @@
+<% taggings.forEach(function(tagging, index) { %>
+  <div class="tagging">
+    <label for="<%= index %>">
+      <input id="<%= index %>" 
+             type="checkbox" 
+             name="recipe[tags_attributes][<%= index %>][tagging_id]" 
+             value="<%= tagging.id %>"
+      >
+      <span><%- tagging.get("name") %></span>
+    </label>
+  </div>
+<% }); %>
