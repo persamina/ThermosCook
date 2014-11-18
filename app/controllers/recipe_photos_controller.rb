@@ -11,6 +11,7 @@ class RecipePhotosController < ApplicationController
 
 	def create
 		@recipe_photo = RecipePhoto.new(params[:recipe_photo])
+    puts @recipe_photo
 		if @recipe_photo.save
       render :showRABL
 		else
