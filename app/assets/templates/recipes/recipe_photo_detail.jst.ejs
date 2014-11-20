@@ -1,1 +1,7 @@
-<img src="<%- recipePhoto.get("url") %>"></img>
+<% if ( index == 0) { %>
+  <div class="item active">
+<% } else { %>
+  <div class="item">
+<% } %>
+    <img src="<%= recipe_photo.get("url") %>"/>
+  </div>

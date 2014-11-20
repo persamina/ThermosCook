@@ -31,7 +31,6 @@
 @linkColor: #6DA67A;
 @navbarBackground: #4A4857; 
 @navbarBrandColor: #4A4857;
-@navbarHeight: 52px;
 
 .navbar-inner {
   border: 0px;
@@ -44,7 +43,7 @@
 }
 
 .tile {
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
   /* margin: 10px 5px 0px 5px; */
   background: #fff;
@@ -111,16 +110,16 @@ input.name {
   font-weight: bold;
 }
 .nav-buttons {
-  padding: 16px 0px;
+  padding: 0px 0px;
 }
 .nav-icon {
   font-size: 30px;
   vertical-align: middle;
 }
 .nav-user-photo {
-  border-radius: 4px;
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
-  height: 40px;
+  border-radius: 15px;
+  //box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
+  height: 30px;
 }
 
 .user-image{
@@ -140,7 +139,7 @@ input.name {
 }
 #tiles {
   position: relative;
-  margin-top: 10px;
+  //margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -158,8 +157,12 @@ div.tagging {
   background: #FFF;
 }
 .tagging label {
-  padding: 3px;
+  //padding: 3px;
   margin: 0px;
+  position: relative;
+}
+.tagging span {
+  padding: 5px;
   position: relative;
 }
 .tagging input{
@@ -186,3 +189,25 @@ input[type="checkbox"]:checked + span:before {
   vertical-align: middle;
   content: "\f046"; /* check */
 }
+.navbar .nav > li > a.nav-button {
+  color: @linkColor;
+  text-shadow: none;
+}
+h5.dropdown {
+  text-align: center;
+  margin: 2px; 
+}
+.dropdown-menu .divider.form {
+  margin: 2px;
+}
+ul.dropdown-menu .form {
+  width: 250px;
+}
+ul.dropdown-menu {
+  min-width: 50px;
+}
+#recipeCarousel {
+  height: 300px;
+  width: 300px;
+}
+

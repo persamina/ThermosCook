@@ -1,0 +1,7 @@
+<% taggings.forEach(function(tagging, index) { %>
+  <a href="#recipes/taggings/<%= tagging.id %>">
+    <div class="tagging">
+        <span><%- tagging.get("name") %></span>
+    </div>
+  </a>
+<% }); %>

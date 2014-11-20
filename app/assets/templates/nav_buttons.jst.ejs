@@ -1,19 +1,66 @@
+<li class="dropdown">
+  <a href="#" id="search-drop" role="button" class="nav-icon dropdown-toggle nav-button" data-toggle="dropdown">
+    <i class="fa fa-search"></i>
+  </a>
+  <ul class="dropdown-menu form" role="menu" aria-labelledby="search-drop">
+    <h5 class="dropdown">Recipe Tags</h5>
+    <li role="presentation" class="divider form"></li>
+    <form class="find-recipes">
+      <div class="recipe-taggings">
+      </div>
+      <input type="submit" class="btn" value=">">
+    </form>
+  </ul>
+</li>
 <% if(ThermosCook.CurrentUser.id) { %>
-  <div class="nav-buttons">
-    <a href="/#user" >
-    <% if( ThermosCook.CurrentUser.get('user_photos').models.length > 0 ) { %>
-        <img class="nav-user-photo" src="<%= ThermosCook.CurrentUser.get('user_photos').models[0].get("thumbnail_url") %>" >
-    <% } else { %>
-        <img class="nav-user-photo" src="portrait_blank.jpg">
-    <% } %>
+  <li class="dropdown">
+    <a href="#" id="new-drop" role="button" class="nav-icon dropdown-toggle nav-button" data-toggle="dropdown">
+      <i class="fa fa-plus"></i>
     </a>
-    <a href="" class="nav-icon" id="destroy_session">
-      <i class="fa fa-sign-out"></i>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="new-drop">
+      <li role="presentation">
+        <a role="menuitem" tabindex="-1" href="#recipes/new">
+          <i class="fa fa-plus"></i>
+          New Recipe
+        </a>
+      </li>
+      <li role="presentation">
+        <a role="menuitem" tabindex="-1" href="#articles/new">
+          <i class="fa fa-plus"></i>
+          New Article
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a href="#" id="user-drop" role="button" class="nav-icon dropdown-toggle nav-button" data-toggle="dropdown">
+       <% if( ThermosCook.CurrentUser.get('user_photos').models.length > 0 ) { %>
+         <img class="nav-user-photo" 
+              src="<%= ThermosCook.CurrentUser.get('user_photos').models[0].get('thumbnail_url') %>" >
+       <% } else { %>
+         <img class="nav-user-photo" src="portrait_blank.jpg">
+       <% } %>
     </a>
-  </div>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="user-drop">
+      <li role="presentation">
+        <a role="menuitem" id="destroy_session" tabindex="-1" href="#">
+          <i class="fa fa-sign-out"></i>
+          Sign Out
+        </a>
+      </li>
+      <li role="presentation">
+        <a role="menuitem" tabindex="-1" href="#user">
+          <i class="fa fa-user"></i>
+          Profile
+        </a>
+      </li>
+    </ul>
+  </li>
 <% } else { %>
-  <div class="nav-buttons">
-    <a href="/#users/sign_up">Sign Up</a>
-    <a href="/#users/sign_in" class="nav-icon"><i class="fa fa-sign-in"></i></a>
-  </div>
+  <li class>
+    <a href="/#users/sign_up" class="nav-button">Sign Up</a>
+  </li>
+  <li class>
+    <a href="/#users/sign_in" class="nav-icon nav-button"><i class="fa fa-sign-in"></i></a>
+  </li>
 <% } %>

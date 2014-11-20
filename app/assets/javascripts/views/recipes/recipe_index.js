@@ -4,7 +4,6 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
 		this.listenTo(this.collection, "remove", this.removeRecipe);
 	},
   events: {
-    "submit .find-recipes": "findRecipes"
   },
 	template: JST["recipes/index"],
 	recipeTemplate: JST["recipes/recipe_detail_list"],
@@ -43,6 +42,7 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
     this.$(".row#tiles").imagesLoaded(function() {
       recipeIndex.positionTiles();
     });
+    this.addTaggings();
 
 		return this;
 	},
@@ -57,7 +57,7 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
   },
   addTaggings: function() {
     var taggingsRenderedContent = this.taggingsTemplate({taggings: ThermosCook.recipeTaggings});
-    $(".recipe-taggings").html(taggingsRenderedContent);
+    this.$(".recipe-taggings").html(taggingsRenderedContent);
   },
   removeRecipe: function(data) {
     $("a[data-recipe-id='"+ data.id +"']").remove();
@@ -101,28 +101,4 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
     });
 
   },
-  findRecipes: function(event) {
-    var recipeIndex = this;
-    event.preventDefault();
-    var taggingData = $(event.currentTarget).serializeJSON();
-    var recipes = new ThermosCook.Collections.Recipes();
-    recipes.url = "recipes/search";
-    recipes.fetch({
-      data: $.param(taggingData),
-      success: function(response) {
-        recipeIndex.collection = response;
-        ThermosCook.recipeSearchResults = response;
-        ThermosCook.recipeSearchResults.tagging_ids = taggingData.tagging_ids;
-        recipeIndex.render();
-        recipeIndex.addTaggings();
-		    Backbone.history.navigate("recipes/search");
-      },
-      error: function(response) {
-        console.log("ERROR!");
-        console.log(response);
-      }
-    });
-
-  },
-
 });

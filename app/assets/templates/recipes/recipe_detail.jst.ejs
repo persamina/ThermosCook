@@ -3,7 +3,18 @@
   <div class="warnings"></div>
   <div class="successes"></div>
   <div class="row">
-      <div class="galleria"></div>
+    <div id="recipeCarousel" class="carousel slide">
+      <ol class="carousel-indicators">
+      </ol>
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+      </div>
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#recipeCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#recipeCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+  </div>
+  <div class="row">
     <div class="recipe-title-description">
       <h3 class="recipe-title"><%- recipe.get("name") %></h3>
       <p><%- recipe.get("description") %></p>
@@ -32,12 +43,7 @@
   </div>
   <div class="row">
     <h4>Tags</h4>
-    <div class="taggings">
-      <% recipe.get("taggings").forEach(function(tagging) { %>
-        <div class="tagging">
-          <span><%- tagging.get("name") %></span>
-        </div>
-      <% }); %>
+    <div class="recipe-taggings">
     </div>
   </div>
 </div>

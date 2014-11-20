@@ -148,6 +148,7 @@ $(document).ready(function(){
     taggingsData= JSON.parse($("#taggings-data").html());
   }
   ThermosCook.recipeTaggings= new ThermosCook.Collections.RecipeTaggings(taggingsData, {parse: true});
+  ThermosCook.searchCount = 0;
 
   new ThermosCook.Routers.AppRouter($(".content"), $(".nav-buttons"));
   Backbone.history.start();

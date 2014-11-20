@@ -14,9 +14,6 @@
 //= require jquery_ujs
 //= require jquery-fileupload
 //= require twitter/bootstrap
-//= require galleria-1.4.2.min
-//= require galleria.classic.min
-//= require galleria_setup
 //= require underscore
 //= require backbone
 //= require backbone-validation-min

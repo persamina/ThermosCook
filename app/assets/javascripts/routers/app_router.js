@@ -10,8 +10,9 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
 
 		"recipes": "recipeIndex",
 		"recipes/new": "newRecipe",
-		"recipes/search": "recipeSearchIndex",
-		"recipes/tagging/:id": "recipeByTagging",
+    //need the id on search so new searches can be done
+		"recipes/search/:id": "recipeSearchIndex",
+		"recipes/taggings/:id": "recipeByTagging",
 		"recipes/:id": "showRecipe",
 		"recipes/:id/edit": "editRecipe",
 		"recipes/:id/recipe_photos": "editRecipePhotos",
@@ -32,19 +33,21 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
     var navButtons = new ThermosCook.Views.NavButtons();
 		this._swapView(recipeIndex.render().$el, navButtons.render().$el);
 		Backbone.history.navigate("recipes");
-    recipeIndex.addTaggings();
 	},
 	recipeSearchIndex: function() {
-		var recipeIndex = new ThermosCook.Views.RecipeIndex({ collection: ThermosCook.recipeSearchResults});
+    var indexCollection = ThermosCook.recipeSearchResults;
+    if(!ThermosCook.recipeSearchResults) {
+      indexCollection = ThermosCook.recipes
+    } 
+		var recipeIndex = new ThermosCook.Views.RecipeIndex({ collection: indexCollection});
     var navButtons = new ThermosCook.Views.NavButtons();
 		this._swapView(recipeIndex.render().$el, navButtons.render().$el);
-    recipeIndex.addTaggings();
 	},
 
   recipeByTagging: function(id) {
     var appRouter = this;
     var taggingRecipes = new ThermosCook.Collections.Recipes();
-    taggingRecipes.url = "recipes/tagging/"+id;
+    taggingRecipes.url = "recipes/taggings/"+id;
     taggingRecipes.fetch({
       success: function(response) {
         var recipeIndex = new ThermosCook.Views.RecipeIndex( {collection: taggingRecipes} );

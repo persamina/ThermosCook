@@ -4,15 +4,24 @@ ThermosCook.Views.NavButtons= Backbone.View.extend({
 	},
 
   events: {
-    "click #destroy_session": "destroySession"
+    "click #destroy_session": "destroySession",
+    "submit .find-recipes": "findRecipes"
   },
 
 	template: JST["nav_buttons"],
+	taggingsTemplate: JST["taggings/find_taggings"],
 
 	render: function() {
-		var renderedContent = this.template({user: ThermosCook.CurrentUser});
-		this.$el.html(renderedContent);
+		var renderedContent = this.template({user: ThermosCook.CurrentUser, taggings: ThermosCook.recipeTaggings});
+    //sets the parent element to something other then a div
+    //http://backbonejs.org/#View-setElement
+    this.setElement($(renderedContent));
+    this.addTaggings();
 		return this;
+  },
+  addTaggings: function() {
+    var taggingsRenderedContent = this.taggingsTemplate({taggings: ThermosCook.recipeTaggings});
+    this.$(".recipe-taggings").html(taggingsRenderedContent);
   },
   destroySession: function(event) {
     event.preventDefault();
@@ -32,6 +41,26 @@ ThermosCook.Views.NavButtons= Backbone.View.extend({
         console.log("error!");
       },
     });
-  }
-
+  },
+  findRecipes: function(event) {
+    var navButtonView= this;
+    event.preventDefault();
+    var taggingData = $(event.currentTarget).serializeJSON();
+    var recipes = new ThermosCook.Collections.Recipes();
+    recipes.url = "recipes/search";
+    recipes.fetch({
+      data: $.param(taggingData),
+      success: function(response) {
+        navButtonView.collection = response;
+        ThermosCook.recipeSearchResults = response;
+        ThermosCook.recipeSearchResults.tagging_ids = taggingData.tagging_ids;
+        ThermosCook.searchCount += 1;
+		    Backbone.history.navigate("recipes/search/" + ThermosCook.searchCount,  {trigger: true});
+      },
+      error: function(response) {
+        console.log("ERROR!");
+        console.log(response);
+      }
+    });
+  },
 });

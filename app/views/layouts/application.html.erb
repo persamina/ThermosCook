@@ -9,9 +9,9 @@
 <body>
   <div class="navbar">
     <div class="navbar-inner">
-      <div class="container-fluid">
+      <div class="container">
         <a class="brand logo navbar-brand" href="#recipes"><img src="ThermosCook.png"></img></a>
-        <div class="nav pull-right nav-buttons">
+        <ul class="nav pull-right nav-buttons">
           <% if current_user %>
             <div class="sign-in-button">
               <a href="#" data-method="delete" id="destroy_session" rel="nofollow">
@@ -23,7 +23,7 @@
             <div class="sign-in-button"><a href="/#users/sign_up"><i class="fa fa-plus"></i><i class="fa fa-user"></i></a></div>
 
           <% end %>
-        </div>
+        </ul>
       </div>
     </div>
   </div>

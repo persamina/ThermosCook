@@ -3,6 +3,8 @@ ThermosCook.Views.RecipeDetail = Backbone.View.extend({
 	ingredientTemplate: JST["recipes/ingredient_detail"],
 	instructionTemplate: JST["recipes/instruction_detail"],
 	photoTemplate: JST["recipes/recipe_photo_detail"],
+	photoIndicatorTemplate: JST["recipes/recipe_photo_indicator"],
+  taggingsTemplate: JST["taggings/index"],
 	events: {
 		"click .delete-recipe": "deleteRecipe",
 		"click .like-button": "likeRecipe",
@@ -22,16 +24,20 @@ ThermosCook.Views.RecipeDetail = Backbone.View.extend({
 			var instructionRenderedContent = recipeDetail.instructionTemplate({number: index+1, instruction: instruction});
 			recipeDetail.$("#instructions").append(instructionRenderedContent);
 		});
-    this.model.get("recipe_photos").each(function(recipePhoto) {
-      var recipePhotoRenderedContent = recipeDetail.photoTemplate({recipePhoto: recipePhoto});
-      recipeDetail.$(".galleria").append(recipePhotoRenderedContent);
+    this.model.get("recipe_photos").each(function(recipePhoto, index) {
+      var recipePhotoRenderedContent = recipeDetail.photoTemplate({recipe_photo: recipePhoto, index: index});
+      recipeDetail.$(".carousel-inner").append(recipePhotoRenderedContent);
+      var recipePhotoIndicatorContent = recipeDetail.photoIndicatorTemplate({index: index});
+      recipeDetail.$(".carousel-indicators").append(recipePhotoIndicatorContent);
     });
 
-    Galleria.run(".galleria", {
-      thumbnails: false,
-    });
+    this.addTaggings();
 		return this;
 	},
+  addTaggings: function() {
+    var taggingsRenderedContent = this.taggingsTemplate({taggings: this.model.get("taggings")});
+    this.$(".recipe-taggings").html(taggingsRenderedContent);
+  },
 	deleteRecipe: function(event) {
     event.preventDefault();
 
