@@ -2,6 +2,7 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
 	initialize: function() {
 		this.listenTo(this.collection, "add change", this.render);
 		this.listenTo(this.collection, "remove", this.removeRecipe);
+    $(window).on("resize", this.positionTiles); 
 	},
   events: {
   },
@@ -23,8 +24,8 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
          placementId: tilesPinned
         }
       );
-			recipeIndex.$(".row#tiles").append(articleRenderedContent);
-      $(recipeIndex.$(".row#tiles").children()[index]).hide()
+			recipeIndex.$(".row-fluid#tiles").append(articleRenderedContent);
+      $(recipeIndex.$(".row-fluid#tiles").children()[index]).hide()
       tilesPinned++;
     });
 
@@ -34,12 +35,12 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
          placementId: tilesPinned
         }
       );
-			recipeIndex.$(".row#tiles").append(recipeRenderedContent);
-      $(recipeIndex.$(".row#tiles").children()[index]).hide()
+			recipeIndex.$(".row-fluid#tiles").append(recipeRenderedContent);
+      $(recipeIndex.$(".row-fluid#tiles").children()[index]).hide()
       tilesPinned++;
 		});
 
-    this.$(".row#tiles").imagesLoaded(function() {
+    this.$(".row-fluid#tiles").imagesLoaded(function() {
       recipeIndex.positionTiles();
     });
     this.addTaggings();

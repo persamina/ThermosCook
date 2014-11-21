@@ -60,6 +60,7 @@ ThermosCook.Views.RecipeDetail = Backbone.View.extend({
     Backbone.history.navigate("recipes", {trigger: true});
 	},
 	likeRecipe: function(event) {
+    var recipeDetailView = this;
     event.preventDefault();
     console.log("recipe liked!");
     var userLike =ThermosCook.CurrentUser.get("likes").findWhere({recipe_id: this.model.id});
@@ -73,6 +74,9 @@ ThermosCook.Views.RecipeDetail = Backbone.View.extend({
             likeModel.set({"authenticity_token": ""});
           }
           ThermosCook.CurrentUser.get("likes").add([likeModel]);
+          var newTotalLikes = recipeDetailView.model.get("likes") + 1;
+          recipeDetailView.model.set("likes", newTotalLikes);
+          $("button.like-count").html(newTotalLikes);
 
           $(".like-button").html("<i class='fa fa-heart color-red'></i> Liked");
         },
@@ -85,6 +89,9 @@ ThermosCook.Views.RecipeDetail = Backbone.View.extend({
         wait: true,
         success: function(likeModel, response, options) {
           ThermosCook.CurrentUser.get("likes").remove(likeModel);
+          var newTotalLikes = recipeDetailView.model.get("likes") - 1;
+          recipeDetailView.model.set("likes", newTotalLikes);
+          $("button.like-count").html(newTotalLikes);
           $(".like-button").html("<i class='fa fa-heart'></i> Like");
           
         },

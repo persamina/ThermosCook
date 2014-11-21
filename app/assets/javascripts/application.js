@@ -21,7 +21,7 @@
 //= require imagesloaded.pkgd.min
 //= require article_photos
 //= require articles
-//= require bootstrap
+//= require bootstrap 
 //= require ingredients
 //= require instructions
 //= require recipe_photos

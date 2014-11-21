@@ -27,6 +27,7 @@ ThermosCook.Views.NewUser = Backbone.View.extend({
       this.model.save({}, {
         success: function(userSession, response) {
           if (userSession.get("user")) {
+            Backbone.history.navigate("#recipes", {trigger: true});
             var message = "a confirmation email was sent check your email to confirm account and log in.";
             ThermosCook.Dispatcher.trigger("newSuccessMessage", {messages: [message]});
 
@@ -34,7 +35,6 @@ ThermosCook.Views.NewUser = Backbone.View.extend({
               ThermosCook.csrfToken = userSession.get("user").authenticity_token;
               userSession.get("user").authenticity_token= "";
             }
-            Backbone.history.navigate("#recipes", {trigger: true});
           }
         },
         error: function(userSession, response) {

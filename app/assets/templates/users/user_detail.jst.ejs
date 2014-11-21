@@ -4,11 +4,16 @@
   <div class="successes"></div>
   <div class="row">
       <h3 class="username"><%= user.get("username") %></h3>
-      <% if( user.get('user_photos').models.length > 0 ) { %>
-        <img class="user-image" src="<%= user.get('user_photos').models[0].get('url') %>">
-      <% } else { %>
-        <img class="user-image" src="portrait_blank.jpg">
-      <% } %>
+      <div class="image-hover-wrapper">
+          <a class="hover-content image-hover" href="#/users/user_photo"> 
+            <i class="fa fa-edit"></i>
+          </a>
+        <% if( user.get('user_photos').models.length > 0 ) { %>
+          <img class="user-image" src="<%= user.get('user_photos').models[0].get('url') %>">
+        <% } else { %>
+          <img class="user-image" src="portrait_blank.jpg">
+        <% } %>
+        </div>
   </div>
   <h3 class="">Recipes</h3>
   <table class="table table-striped table-condensed table-hover recipes">

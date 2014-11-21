@@ -23,7 +23,8 @@
     </div>
   </div>
   <div class="row">
-    <div id="like">
+    <div class="btn-group" id="like">
+      <button class="btn btn-primary like-count"><%= recipe.get("likes") %></button>
       <% if (currentUser.get('likes').findWhere({recipe_id: recipe.id})) { %>
         <a href="#" class="btn btn-primary like-button"><i class="fa fa-heart color-red"></i> Liked</a>
       <% } else { %>
