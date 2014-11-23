@@ -1,5 +1,13 @@
 <li class="dropdown">
-  <a href="#" id="search-drop" role="button" class="nav-icon dropdown-toggle nav-button" data-toggle="dropdown">
+  <a href="#" id="search-drop" 
+     role="button" 
+     class="nav-icon dropdown-toggle nav-button" 
+     data-toggle="dropdown"
+     data-toggle="tooltip" 
+     data-placement="bottom" 
+     title="" 
+     data-original-title="Search" 
+  >
     <i class="fa fa-search"></i>
   </a>
   <ul class="dropdown-menu form" role="menu" aria-labelledby="search-drop">
@@ -16,7 +24,16 @@
 </li>
 <% if(ThermosCook.CurrentUser.id) { %>
   <li class="dropdown">
-    <a href="#" id="new-drop" role="button" class="nav-icon dropdown-toggle nav-button" data-toggle="dropdown">
+    <a href="#" 
+       id="new-drop" 
+       role="button" 
+       class="nav-icon dropdown-toggle nav-button" 
+       data-toggle="dropdown"
+       data-toggle="tooltip" 
+       data-placement="bottom" 
+       title="" 
+       data-original-title="New" 
+    >
       <i class="fa fa-plus"></i>
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="new-drop">
@@ -60,9 +77,25 @@
   </li>
 <% } else { %>
   <li class>
-    <a href="/#users/sign_up" class="nav-button">Sign Up</a>
+    <a href="/#users/sign_up" 
+       data-toggle="tooltip" 
+       data-placement="bottom" 
+       title="" 
+       data-original-title="Create New Account" 
+       class="nav-button nav-text"
+    >
+      Sign Up
+    </a>
   </li>
   <li class>
-    <a href="/#users/sign_in" class="nav-icon nav-button"><i class="fa fa-sign-in"></i></a>
+    <a href="/#users/sign_in" 
+       class="nav-icon nav-button"
+       data-toggle="tooltip" 
+       data-placement="bottom" 
+       title="" 
+       data-original-title="Sign In" 
+    >
+      <i class="fa fa-sign-in"></i>
+    </a>
   </li>
 <% } %>

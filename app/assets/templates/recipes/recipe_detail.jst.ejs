@@ -1,31 +1,41 @@
-<div class="container">
+<div class="container-fluid">
   <div class="errors"></div>
   <div class="warnings"></div>
   <div class="successes"></div>
-  <div class="row">
-    <div id="recipeCarousel" class="carousel slide">
-      <ol class="carousel-indicators">
-      </ol>
-      <!-- Carousel items -->
-      <div class="carousel-inner">
+  <div class="row-fluid">
+    <div class="span3">
+      <div id="recipeCarousel" class="carousel slide">
+        <% if(recipe.get("user_id") == currentUser.id) { %>
+          <a class="delete-recipe hover-link delete-recipe-hover" href="#">
+            <i class="fa fa-times"></i>
+          </a>
+          <a class="edit-recipe hover-link edit-recipe-hover" href="#recipes/<%= recipe.id %>/edit">
+            <i class="fa fa-edit"></i>
+          </a>
+        <% } %>
+        <ol class="carousel-indicators">
+        </ol>
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#recipeCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#recipeCarousel" data-slide="next">&rsaquo;</a>
       </div>
-      <!-- Carousel nav -->
-      <a class="carousel-control left" href="#recipeCarousel" data-slide="prev">&lsaquo;</a>
-      <a class="carousel-control right" href="#recipeCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+    <div class="span6">
+      <div class="recipe-title-description">
+        <h3 class="recipe-title"><%- recipe.get("name") %></h3>
+        <p><%- recipe.get("description") %></p>
+        <p><%= recipe.get("cook_time")%></p>
+        <p><%= recipe.get("prep_time")%></p>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="recipe-title-description">
-      <h3 class="recipe-title"><%- recipe.get("name") %></h3>
-      <p><%- recipe.get("description") %></p>
-      <p><%= recipe.get("cook_time")%></p>
-      <p><%= recipe.get("prep_time")%></p>
-    </div>
-  </div>
-  <div class="row">
+  <div class="row-fluid">
     <div class="btn-group" id="like">
       <button class="btn btn-primary like-count"><%= recipe.get("likes") %></button>
-      <% if (currentUser.get('likes').findWhere({recipe_id: recipe.id})) { %>
+      <% if (currentUser.id && currentUser.get('likes').findWhere({recipe_id: recipe.id})) { %>
         <a href="#" class="btn btn-primary like-button"><i class="fa fa-heart color-red"></i> Liked</a>
       <% } else { %>
         <a href="#" class="btn btn-primary like-button"><i class="fa fa-heart"></i> Like</a>
@@ -37,12 +47,8 @@
     <h4>Instructions</h4>
     <div id="instructions">
     </div>
-    <% if(recipe.get("user_id") == currentUser.id) { %>
-      <a class="delete-recipe btn btn-primary" href="#">Delete</a>
-      <a class="edit-recipe btn btn-primary" href="#recipes/<%= recipe.id %>/edit">Edit</a>
-    <% } %>
   </div>
-  <div class="row">
+  <div class="row-fluid">
     <h4>Tags</h4>
     <div class="recipe-taggings">
     </div>

@@ -8,6 +8,10 @@ ThermosCook.Views.RecipeDetail = Backbone.View.extend({
 	events: {
 		"click .delete-recipe": "deleteRecipe",
 		"click .like-button": "likeRecipe",
+    "mouseenter #recipeCarousel": "imageMouseEnter",
+    "mouseenter .edit-recipe-hover": "imageMouseEnter",
+    "mouseenter .delete-recipe-hover": "imageMouseEnter",
+    "mouseleave #recipeCarousel": "imageMouseLeave"
 	},
 	
 	render: function() {
@@ -82,6 +86,8 @@ ThermosCook.Views.RecipeDetail = Backbone.View.extend({
         },
         error: function(model, response, options) {
           console.log("error liking!");
+          var message = "Sign in so we can remember what you liked!";
+          ThermosCook.Dispatcher.trigger("newErrorMessage", {messages: [message]});
         }
       });
     } else {
@@ -102,6 +108,12 @@ ThermosCook.Views.RecipeDetail = Backbone.View.extend({
       });
 
     }
-	}
+	},
+  imageMouseEnter: function(event) {
+    $(".hover-link").show();
+  },
+  imageMouseLeave: function(event) {
+    $(".hover-link").hide();
+  },
 
 });

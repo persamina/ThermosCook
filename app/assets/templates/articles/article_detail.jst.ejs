@@ -1,18 +1,26 @@
-<div class="container">
+<div class="container-fluid">
   <div class="errors"></div>
   <div class="warnings"></div>
   <div class="successes"></div>
-  <div class="row">
-    <h2><%- article.get("title") %></h2>
+  <div class="row-fluid">
+    <h2>
+      <%- article.get("title") %>
+      <% if(article.get("user_id") == currentUser.id) { %>
+        <a class="delete-article article-title" href="#">
+          <i class="fa fa-edit"></i>
+        </a>
+        <a class="edit-article article-title" href="#articles/<%= article.id %>/edit">
+          <i class="fa fa-times"></i>
+        </a>
+      <% } %>
+    </h2>
     <div id="like">
-      <% if (currentUser.get('likes').findWhere({article_id: article.id})) { %>
+      <% if (currentUser.id && currentUser.get('likes').findWhere({article_id: article.id})) { %>
         <a href="#" class="btn btn-primary like-button"><i class="fa fa-heart color-red"></i> Liked</a>
       <% } else { %>
         <a href="#" class="btn btn-primary like-button"><i class="fa fa-heart"></i> Like</a>
       <% } %>
     </div>
-    <a class="edit-article btn btn-primary" href="#articles/<%= article.id %>/edit">Edit</a>
-    <a class="delete-article btn btn-primary" href="#">Delete</a>
     <%= article.get("body") %>
   </div>
 </div>

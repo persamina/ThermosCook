@@ -17,6 +17,7 @@ ThermosCook.Views.NavButtons= Backbone.View.extend({
     //http://backbonejs.org/#View-setElement
     this.setElement($(renderedContent));
     this.addTaggings();
+    this.$(".nav-button").tooltip();
 		return this;
   },
   addTaggings: function() {
@@ -33,7 +34,7 @@ ThermosCook.Views.NavButtons= Backbone.View.extend({
       success: function(model, response) {
         if (response && response.csrfToken) {
           ThermosCook.csrfToken = response.csrfToken;
-          ThermosCook.CurrentUser = new ThermosCook.Models.User();
+          ThermosCook.CurrentUser = new ThermosCook.Models.User({},{parse: true});
           Backbone.history.navigate("", {trigger: true});
         }
       },

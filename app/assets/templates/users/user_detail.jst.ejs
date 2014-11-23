@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container-fluid">
   <div class="errors"></div>
   <div class="warnings"></div>
   <div class="successes"></div>
-  <div class="row">
+  <div class="row-fluid">
       <h3 class="username"><%= user.get("username") %></h3>
       <div class="image-hover-wrapper">
-          <a class="hover-content image-hover" href="#/users/user_photo"> 
+          <a class="hover-link image-hover" href="#/users/user_photo"> 
             <i class="fa fa-edit"></i>
           </a>
         <% if( user.get('user_photos').models.length > 0 ) { %>
@@ -45,7 +45,7 @@
   </table>
   <div class="tags">
   </div>
-  <div class="row">
+  <div class="row-fluid">
     <% if ( user.id == currentUser.id) { %>
       <a class="btn btn-primary" href="#">Delete Account</a>
     <% } %>

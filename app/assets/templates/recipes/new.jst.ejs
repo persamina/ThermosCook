@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="errors"></div>
   <div class="warnings"></div>
   <div class="successes"></div>
@@ -9,7 +9,7 @@
         enctype="multipart/form-data" 
         method="post"
     >
-    <div class="row">
+    <div class="row-fluid">
       <h2>New Recipe</h2>
       <div class="name control-group">
         <input type="text" name="recipe[name]" placeholder="Name">
@@ -17,21 +17,26 @@
       </div>
 
       <div class="description control-group">
-        <input type="text" name="recipe[description]" placeholder="Description">
+        <textarea rows="3" type="textarea" name="recipe[description]" placeholder="Description"></textarea
         <span class="help-inline"></span>
       </div>
-
       <div class="prep_time control-group">
-        <input type="text" name="recipe[prep_time]" placeholder="Prep Time">
+        <div class="input-append">
+          <input type="text" class="input-small" name="recipe[prep_time]" placeholder="Prep Time">
+          <span class="add-on">minutes</span>
+        </div>
         <span class="help-inline"></span>
       </div>
 
       <div class="cook_time control-group">
-        <input type="text" name="recipe[cook_time]" placeholder="Cook Time">
+        <div class="input-append">
+          <input type="text" class="input-small" name="recipe[cook_time]" placeholder="Cook Time">
+          <span class="add-on">minutes</span>
+        </div>
         <span class="help-inline"></span>
       </div>
     </div>
-    <div class="row">
+    <div class="row-fluid">
       <div class="recipe-title-description"><h4>Select Tags</h4></div>
       <div class="new_tagging">
         <input type="hidden" name="tagging[type_class]" value="Recipe">
@@ -41,7 +46,7 @@
       <div class="taggings">
       </div>
     </div>
-    <div class="row">
+    <div class="row-fluid">
       <h4>Ingredients</h4> <a href="" class="add_ingredient btn btn-primary">Add Ingredient</a>
       <div class="ingredients">
       </div>

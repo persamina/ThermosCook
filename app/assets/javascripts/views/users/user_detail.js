@@ -23,9 +23,9 @@ ThermosCook.Views.UserDetail = Backbone.View.extend({
     }
   },
   imageMouseEnter: function(event) {
-    $(".hover-content").show();
+    $(".hover-link").show();
   },
   imageMouseLeave: function(event) {
-    $(".hover-content").hide();
+    $(".hover-link").hide();
   },
 });

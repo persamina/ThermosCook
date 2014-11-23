@@ -24,14 +24,14 @@ window.ThermosCook = {
           ThermosCook.Methods.handleNestedErrors(name, errorMessages[name]);
         } else {
           $("div."+name).addClass("error");
-          $("div."+name + " span").html("");
+          $("div."+name + " span.help-inline").html("");
           //capitalize name
           var nameCapitalized = name[0].toUpperCase() + name.slice(1);
           if(backboneError) {
-            $("div."+ name + " span").append(errorMessages[name] + ".");
+            $("div."+ name + " span.help-inline").append(errorMessages[name] + ".");
           } else {
             errorMessages[name].forEach(function(message) {
-              $("div."+name + " span").append(nameCapitalized + " " + message + ".");
+              $("div."+name + " span.help-inline").append(nameCapitalized + " " + message + ".");
             });
           }
         }

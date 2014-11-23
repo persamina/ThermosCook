@@ -116,6 +116,9 @@ input.name {
   font-size: 30px;
   vertical-align: middle;
 }
+.nav-text {
+  line-height: 30px;
+}
 .nav-user-photo {
   border-radius: 15px;
   //box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
@@ -207,14 +210,21 @@ ul.dropdown-menu {
   min-width: 50px;
 }
 #recipeCarousel {
+  height: 300px;
   width: 300px;
+  position: relative;
   background: #000;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 }
 img.carousel-image {
   max-height: 300px;
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
+  vertical-align: middle;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 }
 .carousel-control {
   margin-top: 0px;
@@ -223,25 +233,67 @@ img.carousel-image {
   font-size: 40px;
   width: 20px; 
 }
-.hover-content {
-  position: absolute;
+
+.carousel-inner > .item {
+  height: 300px;
+  width: 300px;
 }
-.image-hover {
+
+.hover-link{
+  position: absolute;
   display: none;
   border-radius: 15px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
   padding: 5px 3px 3px 5px;
-  right: 5px;
-  bottom: 5px;
   font-size: 16px;
   line-height: 16px;
   color: #FFF;
   background: @linkColor;
-
+  z-index: 101;
+}
+.circle-link{
+  border-radius: 15px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+  padding: 5px 3px 3px 5px;
+  font-size: 16px;
+  line-height: 16px;
+  color: #FFF;
+  background: @linkColor;
+  z-index: 101;
+}
+.image-hover {
+  right: 5px;
+  bottom: 5px;
 }
 div.image-hover-wrapper {
   height: 100px;
   width: 100px;
   position: relative;
 }
+a.hover-link > i {
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+  text-align: center;
+}
+a.circle-link > i {
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+  text-align: center;
+}
+.delete-recipe-hover {
+  right: 5px;
+  bottom: 5px;
+}
+.edit-recipe-hover {
+  right: 35px;
+  bottom: 5px;
+}
+a.article-title {
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 20px;
+}
+
 
