@@ -9,18 +9,38 @@
       <div class="span8">
         <h2>Sign Up</h2>
         <div class="email control-group">
-          <input type="text" name="user[email]" placeholder="Email">
+          <div class="input-prepend">
+            <span class="add-on">
+              <i class="fa fa-envelope primary-color"></i>
+            </span>
+            <input type="text" name="user[email]" placeholder="Email">
+          </div>
           <span class="help-inline"></span>
         </div>
         <div class="username control-group">
-          <input type="text" name="user[username]" placeholder="Username">
+          <div class="input-prepend">
+            <span class="add-on">
+              <i class="fa fa-user primary-color"></i>
+            </span>
+            <input type="text" name="user[username]" placeholder="Username">
+          </div>
           <span class="help-inline"></span>
         </div>
         <div class="password password_confirmation control-group">
-          <input type="password" name="user[password]" placeholder="Password">
+          <div class="input-prepend">
+            <span class="add-on">
+              <i class="fa fa-lock primary-color"></i>
+            </span>
+            <input type="password" name="user[password]" placeholder="Password">
+          </div>
           <span class="help-inline"></span>
           <div style="margin-bottom: 10px;"></div>
-          <input type="password" name="user[password_confirmation]" placeholder="Password Confirmation">
+          <div class="input-prepend">
+            <span class="add-on">
+              <i class="fa fa-lock primary-color"></i>
+            </span>
+            <input type="password" name="user[password_confirmation]" placeholder="Password Confirmation">
+          </div>
         </div>
         <button type="submit" class="btn btn-primary start no-gradient">
           <span>Sign Up!</span>
