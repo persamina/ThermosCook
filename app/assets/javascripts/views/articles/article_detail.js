@@ -27,6 +27,7 @@ ThermosCook.Views.ArticleDetail = Backbone.View.extend({
     Backbone.history.navigate("recipes", {trigger: true});
 	},
 	likeArticle: function(event) {
+    var articleDetailView = this;
     event.preventDefault();
     var userLike =ThermosCook.CurrentUser.get("likes").findWhere({article_id: this.model.id});
     if(!userLike) {
@@ -39,6 +40,9 @@ ThermosCook.Views.ArticleDetail = Backbone.View.extend({
             likeModel.set({"authenticity_token": ""});
           }
           ThermosCook.CurrentUser.get("likes").add([likeModel]);
+          var newTotalLikes = articleDetailView.model.get("likes") + 1;
+          articleDetailView.model.set("likes", newTotalLikes);
+          $("button.like-count").html(newTotalLikes);
 
           $(".like-button").html("<i class='fa fa-heart color-red'></i> Liked");
         },
@@ -54,6 +58,9 @@ ThermosCook.Views.ArticleDetail = Backbone.View.extend({
         success: function(likeModel, response, options) {
           ThermosCook.CurrentUser.get("likes").remove(likeModel);
           $(".like-button").html("<i class='fa fa-heart'></i> Like");
+          var newTotalLikes = articleDetailView.model.get("likes") - 1;
+          articleDetailView.model.set("likes", newTotalLikes);
+          $("button.like-count").html(newTotalLikes);
         },
         error: function(model, response, options) {
           var message = "Error Unliking Article!";

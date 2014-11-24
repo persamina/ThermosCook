@@ -1,6 +1,6 @@
 object false
 node(:id) {@article.id}
-node(:id) {@article.user_id}
+node(:user_id) {@article.user_id}
 node(:name) {@article.title}
 node(:body) {@article.body}
 node(:pinned) {@article.pinned}

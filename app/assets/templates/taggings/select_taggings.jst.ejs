@@ -1,5 +1,10 @@
-<% taggings.forEach(function(tagging, index) { %>
+<% allTaggings.forEach(function(tagging, index) { %>
+  <% if (!currentTaggings.findWhere({id: tagging.id})) { %>
   <div class="tagging">
+    <input type="hidden" 
+           name="recipe[tags_attributes][<%= index %>][user_id]" 
+           value="<%= ThermosCook.CurrentUser.id %>"
+    >
     <label for="select<%= index %>">
       <input id="select<%= index %>" 
              type="checkbox" 
@@ -9,4 +14,5 @@
       <span><%- tagging.get("name") %></span>
     </label>
   </div>
+  <% } %>
 <% }); %>

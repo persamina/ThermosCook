@@ -6,15 +6,16 @@
     <h2>
       <%- article.get("title") %>
       <% if(article.get("user_id") == currentUser.id) { %>
-        <a class="delete-article article-title" href="#">
+        <a class="edit-article article-title" href="#articles/<%= article.id %>/edit">
           <i class="fa fa-edit"></i>
         </a>
-        <a class="edit-article article-title" href="#articles/<%= article.id %>/edit">
+        <a class="delete-article article-title" href="#">
           <i class="fa fa-times"></i>
         </a>
       <% } %>
     </h2>
-    <div id="like">
+    <div class="btn-group" id="like">
+      <button class="btn btn-primary like-count"><%= article.get("likes") %></button>
       <% if (currentUser.id && currentUser.get('likes').findWhere({article_id: article.id})) { %>
         <a href="#" class="btn btn-primary like-button"><i class="fa fa-heart color-red"></i> Liked</a>
       <% } else { %>

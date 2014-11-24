@@ -20,6 +20,7 @@ class RecipesController < ApplicationController
 	def create
 		@recipe = Recipe.new(params[:recipe])
     @recipe.user_id = current_user.id
+    debugger
 		if @recipe.save
 		  respond_to do |format|
 			  format.json { render :showRABL }

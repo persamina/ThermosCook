@@ -1,5 +1,6 @@
 class TaggingsController < ApplicationController
 
+  before_filter :authenticate_user!, only: [:create, :destroy]
   def create
 		@tagging = Tagging.new(params[:tagging])
 		if @tagging.save

@@ -25,5 +25,8 @@ end
 child(@recipe.taggings, :object_root => false) do |tagging|
   attributes :id, :name, :type_class
 end
+child(@recipe.tags, :object_root => false) do |tags|
+  attributes :id, :tagable_id, :tagable_type, :tagging_id
+end
 
 node(:authenticity_token) { form_authenticity_token}

@@ -5,12 +5,15 @@ ThermosCook.Views.EditRecipe = Backbone.View.extend({
 	photoLoaderTemplate: JST["recipes/photo_loader"],
 	newIngredientTemplate: JST["recipes/new_ingredient"],
 	newInstructionTemplate: JST["recipes/new_instruction"],
+  taggingsTemplate: JST["taggings/select_taggings"],
+  deleteTaggingsTemplate: JST["taggings/delete_taggings"],
 
 	events: {
 		"click .add_ingredient": "addNewIngredient",
 		"click .add_instruction": "addNewInstruction",
-
-    "submit #update_recipe": "submit",
+		"click .delete-tagging": "deleteTagging",
+    "submit .update_recipe": "submit",
+    "click .create_tagging": "submitTagging",
 	},
 
 	render: function() {
@@ -28,8 +31,19 @@ ThermosCook.Views.EditRecipe = Backbone.View.extend({
       editRecipeView.$(".ingredients").append(ingredientRenderedContent);
     });
 
+    this.addTaggings();
 		return this;
 	},
+  addTaggings: function() {
+    var deleteTaggingsRenderedContent = this.deleteTaggingsTemplate({taggings: this.model.get("taggings")});
+    this.$(".current-taggings").html(deleteTaggingsRenderedContent);
+    var taggingsRenderedContent = this.taggingsTemplate(
+        { allTaggings: ThermosCook.recipeTaggings, 
+          currentTaggings: this.model.get("taggings")}
+        );
+    this.$(".taggings").html(taggingsRenderedContent);
+
+  },
 
 	addNewIngredient: function(event) {
 		event.preventDefault();
@@ -46,6 +60,29 @@ ThermosCook.Views.EditRecipe = Backbone.View.extend({
 		var instructionRenderedContent = this.newInstructionTemplate({index: index, instruction: instruction});
 		$(".instructions").append(instructionRenderedContent);
 	},
+  deleteTagging: function(event) {
+    var editRecipeView = this;
+    event.preventDefault();
+    var taggingId = $(event.currentTarget).attr("id");
+
+    var tag = this.model.get("tags").findWhere(
+        {tagging_id: parseInt(taggingId), tagable_id: editRecipeView.model.id, tagable_type: "Recipe"} );
+    if (tag) {
+      tag.destroy({
+        success: function(model, response) {
+          $(".delete-tagging#"+taggingId).parent().remove();
+          var taggingModel = editRecipeView.model.get("taggings").findWhere({id: parseInt(taggingId)});
+          editRecipeView.model.get("taggings").remove(taggingModel);
+          editRecipeView.addTaggings();
+        },
+        error: function(model, response) {
+
+        }
+      });
+
+    }
+
+  },
   submit: function(event) {
     var newRecipeView = this;
     event.preventDefault();
@@ -59,6 +96,31 @@ ThermosCook.Views.EditRecipe = Backbone.View.extend({
       }
     });
 
+  },
+  submitTagging: function(event) {
+    var editRecipeView = this;
+    event.preventDefault();
+    var newTaggingData = $("form").serializeJSON().tagging;
+    var newTagging = new ThermosCook.Models.Tagging(newTaggingData);
+    Backbone.Validation.bind(this);
+    ThermosCook.recipeTaggings.create(newTagging, {
+      wait: true,
+      success: function(tagging) {
+        editRecipeView.addTaggings();
+        $("#tagging_name").val("");
+        if(tagging.get("authenticity_token")) {
+          ThermosCook.csrfToken = tagging.get("authenticity_token");
+          tagging.set("authenticity_token");
+        }
+      },
+      error: function(recipeSession, response) {
+        var csrfToken = response.responseJSON.authenticity_token;
+        if (csrfToken && csrfToken.length > 0) 
+        {
+          ThermosCook.csrfToken = csrfToken;
+        }
+      },
+    });
   },
 
 });

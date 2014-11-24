@@ -6,6 +6,7 @@ ThermosCook.Models.Recipe = Backbone.Model.extend({
 		respAttr.instructions = new ThermosCook.Collections.Instructions(respAttr.instructions);
 		respAttr.recipe_photos = new ThermosCook.Collections.RecipePhotos(respAttr.recipe_photos);
 		respAttr.taggings = new ThermosCook.Collections.RecipeTaggings(respAttr.taggings);
+		respAttr.tags = new ThermosCook.Collections.Tags(respAttr.tags);
 		return respAttr;
 	},
   validation: {

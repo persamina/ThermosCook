@@ -52,7 +52,8 @@ ThermosCook.Views.NewRecipe = Backbone.View.extend({
     
   },
   addTaggings: function() {
-    var taggingsRenderedContent = this.taggingsTemplate({taggings: ThermosCook.recipeTaggings});
+    var currentTaggings = new ThermosCook.Collections.RecipeTaggings();
+    var taggingsRenderedContent = this.taggingsTemplate({allTaggings: ThermosCook.recipeTaggings, currentTaggings: currentTaggings});
     $(".taggings").html(taggingsRenderedContent);
   },
 

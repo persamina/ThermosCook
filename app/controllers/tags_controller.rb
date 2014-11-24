@@ -1,14 +1,14 @@
 class TagsController < ApplicationController
   before_filter :load_tagable, :except => [:destroy]
-  before_filter :authenticate_user
+  before_filter :authenticate_user!
   def index
     @tags = Tag.all
     render :indexRABL
   end
 
   def create
-    debugger
     @tag = @tagable.tags.new(params[:tag])
+    debugger
     @tag.user_id = current_user.id
     if @tag.save 
       render :showRABL
@@ -19,7 +19,7 @@ class TagsController < ApplicationController
 
   def destroy
     @tag = Tag.find(params[:id])
-    if @tag && current_user.id = @tag.user_id
+    if @tag && current_user.id == @tag.user_id
       @tag.destroy
 			render :showRABL
     else

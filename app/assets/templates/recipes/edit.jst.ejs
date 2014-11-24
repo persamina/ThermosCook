@@ -5,21 +5,64 @@
 
 <div class="row-fluid">
   <h2>Edit Recipe</h2>
-  <div id="photo_loader">
   <form accept-charset="UTF-8" action="/recipes" class="update_recipe" enctype="multipart/form-data" method="put">
-    <input type="text" name="recipe[name]" placeholder="Name" value="<%= this.model.get("name") %>">
-    <br>
-
-    <input type="text" name="recipe[description]" placeholder="Description" value="<%= this.model.get("description") %>">
-    <br>
-
-    <h4>Ingredients</h4> <a href="" class="add_ingredient btn btn-primary">Add Ingredient</a>
-    <div class="ingredients">
+    <div class="name control-group">
+      <input type="text" name="recipe[name]" placeholder="Name" value="<%= this.model.get("name") %>">
+      <span class="help-inline"></span>
     </div>
 
-    <h4>Instructions</h4> <a href="" class="add_instruction btn btn-primary">Add Instruction</a>
-    <div class="instructions">
+    <div class="description control-group">
+      <textarea rows="3" type="textarea" name="recipe[description]" placeholder="Description">
+        <%- this.model.get("description") %>
+      </textarea
+      <span class="help-inline"></span>
     </div>
+    <div class="prep_time control-group">
+      <div class="input-append">
+        <input type="text" 
+               class="input-small" 
+               name="recipe[prep_time]" 
+               placeholder="Prep Time" 
+               value="<%- this.model.get("prep_time") %>"
+        >
+        <span class="add-on">minutes</span>
+      </div>
+      <span class="help-inline"></span>
+    </div>
+
+    <div class="cook_time control-group">
+      <div class="input-append">
+        <input type="text" 
+               class="input-small" 
+               name="recipe[cook_time]" 
+               placeholder="Cook Time"
+               value="<%- this.model.get("cook_time") %>"
+        >
+        <span class="add-on">minutes</span>
+      </div>
+      <span class="help-inline"></span>
+    </div>
+
+  <div class="row-fluid">
+    <div class="recipe-title-description"><h4>Select Tags</h4></div>
+    <div class="current-taggings">
+    </div>
+    <div class="new_tagging">
+      <input type="hidden" name="tagging[type_class]" value="Recipe">
+      <input id="tagging_name" class="unit" type="text" name="tagging[name]" placeholder="New Tag Name">
+      <a href="#" class="btn btn-primary create_tagging">Create</a>
+    </div>
+    <div class="taggings">
+    </div>
+  </div>
+
+  <h4>Ingredients</h4> <a href="" class="add_ingredient btn btn-primary">Add Ingredient</a>
+  <div class="ingredients">
+  </div>
+
+  <h4>Instructions</h4> <a href="" class="add_instruction btn btn-primary">Add Instruction</a>
+  <div class="instructions">
+  </div>
    
 
     <input class="btn btn-primary update_recipe" type="submit" value="Update and Edit Photos"/>

@@ -1,0 +1,12 @@
+<% if (taggings) { %>
+  <% taggings.forEach(function(tagging, index) { %>
+    <a href="#recipes/taggings/<%= tagging.id %>">
+      <div class="tagging">
+          <span><%- tagging.get("name") %></span>
+          <a href="#" class="delete-tagging" id="<%= tagging.id %>">
+            <i class="fa fa-times"></i>
+          </a>
+      </div>
+    </a>
+  <% }); %>
+<% } %>

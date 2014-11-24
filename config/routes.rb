@@ -21,6 +21,10 @@ ThermosCook::Application.routes.draw do
     get "search", to: "recipes#taggingsSearch", on: :collection
 
   end
+  resources :articles, :only => [:create, :update, :destroy] do
+    get :showJFU
+  end
+
 	resources :instructions, :only => [:create, :update, :destroy]
 	resources :ingredients, :only => [:create, :update, :destroy]
 	resources :recipe_photos, :only => [:create, :destroy, :show]
