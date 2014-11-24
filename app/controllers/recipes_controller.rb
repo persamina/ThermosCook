@@ -2,12 +2,12 @@ class RecipesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :taggingsSearch, :taggingsIndex]
 
 	def index
-		@recipes = Recipe.includes(:instructions).includes(:ingredients).includes(:recipe_photos).includes(:likes).includes(:taggings)
+		@recipes = Recipe.includes(:instructions).includes(:ingredients).includes(:recipe_photos).includes(:likes).includes(:taggings).includes(:user)
     @articles = Article.includes(:article_photos).includes(:likes)  
     if current_user
       @user = User.find(current_user.id, :include => [{:recipes => [:instructions, 
         :ingredients, 
-        :recipe_photos]}, 
+        :recipe_photos, :likes, :taggings, :user]}, 
         :user_photos, :likes])
     end
     @taggings = Tagging.where("type_class = ?", "Recipe")

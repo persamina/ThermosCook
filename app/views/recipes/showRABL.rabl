@@ -28,5 +28,8 @@ end
 child(@recipe.tags, :object_root => false) do |tags|
   attributes :id, :tagable_id, :tagable_type, :tagging_id
 end
-
+child(@recipe.user, :object_root => false) do |user|
+  attributes :id, :username
+  node(:thumbnail_url, :if => lambda { |m| m.user_photos.count > 0}) { user.user_photos[0].photo.url(:small) }
+end
 node(:authenticity_token) { form_authenticity_token}

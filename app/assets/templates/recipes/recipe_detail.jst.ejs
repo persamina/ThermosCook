@@ -25,7 +25,10 @@
     </div>
     <div class="span6">
       <div class="recipe-title-description">
-        <h3 class="recipe-title"><%- recipe.get("name") %></h3>
+        <h3 class="recipe-title">
+          <%- recipe.get("name") %>
+        </h3>
+        <img src="<%-recipe.get("user").thumbnail_url %>" class="nav-user-photo">
         <p><%- recipe.get("description") %></p>
         <p><%= recipe.get("cook_time")%></p>
         <p><%= recipe.get("prep_time")%></p>

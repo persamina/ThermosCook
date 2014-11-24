@@ -19,3 +19,7 @@ collection @recipes, :object_root => false
   child(:tags, :object_root => false) do |tags|
     attributes :id, :tagable_id, :tagable_type, :tagging_id
   end
+  child(:user, :object_root => false) do |user|
+    attributes :id, :username
+    node(:thumbnail_url, :if => lambda { |m| m.user_photos.count > 0}) { user.user_photos[0].photo.url(:small) }
+  end
