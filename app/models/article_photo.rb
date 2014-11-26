@@ -4,5 +4,11 @@ class ArticlePhoto < ActiveRecord::Base
 		thumb: "100x100",
 		original: "640x640"
 	}
+  after_post_process :save_image_ratio
 	belongs_to :article, :inverse_of => :article_photos
+
+  def save_image_ratio
+    geo = Paperclip::Geometry.from_file(photo.queued_for_write[:original])
+    self.ratio = geo.height.to_f / geo.width
+  end
 end

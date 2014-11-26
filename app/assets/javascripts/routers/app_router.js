@@ -32,6 +32,7 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
 		var recipeIndex = new ThermosCook.Views.RecipeIndex({ collection: ThermosCook.recipes });
     var navButtons = new ThermosCook.Views.NavButtons();
 		this._swapView(recipeIndex.render().$el, navButtons.render().$el);
+    recipeIndex.positionTiles();
 		Backbone.history.navigate("recipes");
 	},
 	recipeSearchIndex: function() {

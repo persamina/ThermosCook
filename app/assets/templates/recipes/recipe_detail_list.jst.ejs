@@ -6,9 +6,9 @@
 
   <div>
   <% if(recipe.get("recipe_photos").models.length > 0 ) { %>
-    <img src="<%- recipe.get("recipe_photos").models[0].get("thumbnail_url") %>"></img>
+    <img src="<%- recipe.get("recipe_photos").models[0].get("thumbnail_url") %>" style="height: <%= imgHeight %>px; width: <%= imgWidth %>px;"></img>
   <% } else { %>
-    <img src="recipe_placeholder.png"></img>
+    <img src="recipe_placeholder.png" style="height: <%= imgHeight %>px; width: <%= imgWidth %>px;"></img>
   <% } %>
   </div>
 
