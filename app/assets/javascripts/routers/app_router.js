@@ -43,6 +43,7 @@ ThermosCook.Routers.AppRouter = Backbone.Router.extend({
 		var recipeIndex = new ThermosCook.Views.RecipeIndex({ collection: indexCollection});
     var navButtons = new ThermosCook.Views.NavButtons();
 		this._swapView(recipeIndex.render().$el, navButtons.render().$el);
+    recipeIndex.positionTiles();
 	},
 
   recipeByTagging: function(id) {

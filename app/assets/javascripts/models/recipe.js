@@ -22,6 +22,9 @@ ThermosCook.Models.Recipe = Backbone.Model.extend({
     cook_time: {
       pattern: "number"
     },
+    servings: {
+      pattern: "number"
+    },
     ingredients_attributes: function(value) {
       var errors = {"ingredient_errors": {}};
       if(value) {

@@ -3,6 +3,7 @@ class Recipe < ActiveRecord::Base
 									:description, 
                   :prep_time,
                   :cook_time,
+                  :servings,
 									:ingredients_attributes, 
 									:instructions_attributes, 
 									:recipe_photos_attributes,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141126191300) do
+ActiveRecord::Schema.define(:version => 20141126212345) do
 
   create_table "article_photos", :force => true do |t|
     t.string   "description"
@@ -77,10 +77,11 @@ ActiveRecord::Schema.define(:version => 20141126191300) do
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.integer  "prep_time"
     t.integer  "cook_time"
+    t.integer  "servings",    :default => 1
   end
 
   add_index "recipes", ["name"], :name => "index_recipes_on_name", :unique => true

@@ -30,8 +30,9 @@
         </h3>
         <img src="<%-recipe.get("user").thumbnail_url %>" class="nav-user-photo">
         <p><%- recipe.get("description") %></p>
-        <p><%= recipe.get("cook_time")%></p>
-        <p><%= recipe.get("prep_time")%></p>
+        <p>Prep Time: <%= recipe.get("prep_time")%></p>
+        <p>Cook Time: <%= recipe.get("cook_time")%></p>
+        <p>Servings: <%= recipe.get("servings")%></p>
       </div>
     </div>
   </div>

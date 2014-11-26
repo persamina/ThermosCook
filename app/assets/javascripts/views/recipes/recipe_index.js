@@ -32,7 +32,6 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
         }
       );
 			recipeIndex.$(".row-fluid#tiles").append(articleRenderedContent);
-      $(recipeIndex.$(".row-fluid#tiles").children()[index]).hide()
       tilesPinned++;
     });
 
@@ -50,12 +49,11 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
         }
       );
 			recipeIndex.$(".row-fluid#tiles").append(recipeRenderedContent);
-      $(recipeIndex.$(".row-fluid#tiles").children()[index]).hide()
       tilesPinned++;
 		});
 
     //this.$(".row-fluid#tiles").imagesLoaded(function() {
-    //  recipeIndex.positionTiles();
+    //recipeIndex.positionTiles();
     //});
     this.addTaggings();
 
@@ -106,7 +104,6 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
 
       recipeIndex.$($(tile).children()).animate({top: positions.topPosition + "px",
                                      left: positions.leftPosition + "px" }, "slow");
-      recipeIndex.$(tile).show();
 
       lowestPosition[lPIndex] = positions.topPosition + 
                                 recipeIndex.$($("div.tile")[numberPlaced]).height() +
