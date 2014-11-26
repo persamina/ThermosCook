@@ -2,6 +2,7 @@ collection @recipe.recipe_photos, :root => :files, :object_root => false
 node(:id) { |recipe_photo| recipe_photo.id }
 node(:name) { |recipe_photo| recipe_photo.photo_file_name}
 node(:size) { |recipe_photo| recipe_photo.photo_file_size}
+node(:ratio) { |recipe_photo| recipe_photo.ratio}
 node(:url) { |recipe_photo| recipe_photo.photo.url(:original)}
 node(:description) { |recipe_photo| recipe_photo.description}
 node(:thumbnail_url) { |recipe_photo| recipe_photo.photo.url(:thumb) }

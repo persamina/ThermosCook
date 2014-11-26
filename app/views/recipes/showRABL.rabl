@@ -13,7 +13,7 @@ child(@recipe.instructions, :object_root => false) do |instruction|
 	attributes :id, :description, :order
 end
 child(@recipe.recipe_photos, :object_root => false) do |recipe_photo|
-	attributes :id, :description
+	attributes :id, :description, :ratio
 	node(:url) { |recipe_photo| recipe_photo.photo.url(:original)}
 	node(:thumbnail_url) { |recipe_photo| recipe_photo.photo.url(:thumb)}
   node(:recipe_id) { |recipe_photo| recipe_photo.recipe_id }

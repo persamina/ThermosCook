@@ -4,7 +4,7 @@ collection @recipes, :object_root => false
   child(:ingredients, :object_root => false) { attributes :id, :name, :amount, :unit } 
   child(:instructions, :object_root => false) { attributes :id, :description }
   child(:recipe_photos, :object_root => false) do |recipe_photo|
-    attributes :id, :description
+    attributes :id, :description, :ratio
     node(:url) { |recipe_photo| recipe_photo.photo.url(:original)}
     node(:thumbnail_url) { |recipe_photo| recipe_photo.photo.url(:thumb)}
     node(:recipe_id) { |recipe_photo| recipe_photo.recipe_id }

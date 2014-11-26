@@ -3,6 +3,7 @@ node(:id) {@recipe_photo.id }
 node(:recipe_id) {@recipe_photo.recipe_id }
 node(:name) { @recipe_photo.photo_file_name }
 node(:size) { @recipe_photo.photo_file_size }
+node(:ratio) {@recipe_photo.ratio}
 node(:url) { @recipe_photo.photo.url(:original) }
 node(:description) { @recipe_photo.description }
 node(:thumbnail_url) { @recipe_photo.photo.url(:thumb) }
