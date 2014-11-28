@@ -1,7 +1,7 @@
 class ArticlePhoto < ActiveRecord::Base
   attr_accessible :description, :photo, :article_id
 	has_attached_file :photo, :styles => {
-		thumb: "100x100",
+		thumb: "300x",
 		original: "640x640"
 	}
   after_post_process :save_image_ratio

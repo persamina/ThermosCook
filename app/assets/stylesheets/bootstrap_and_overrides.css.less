@@ -31,6 +31,8 @@
 @linkColor: #6DA67A;
 @navbarBackground: #4A4857; 
 @navbarBrandColor: #4A4857;
+@navbarHeight: 50px;
+@tileWidth: 250px;
 
 .navbar-inner {
   border: 0px;
@@ -43,28 +45,72 @@
 }
 
 .tile {
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
   /* margin: 10px 5px 0px 5px; */
   background: #fff;
   overflow: hidden;
   /* float: left; */
-  width: 200px;
+  width: @tileWidth;
   position: absolute;
   display: block;
+  background-position: center;
+  background-size: cover;
+}
+.gradient {
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.6))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.6) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+
+}
+.opaque {
+  background: rgb(0, 0, 0); /* The Fallback */
+  background: rgba(0, 0, 0, 0.2); 
 }
 
 .tile a:hover {
   text-decoration: none;
   color: @linkColor;
 }
-.tile-title {
-  margin: 0px 3px 0px 3px;
+
+h4.tile-title {
+  position: absolute;
+  padding: 5px 5px 10px 5px;
+  width: @tileWidth - 10px;
   text-align: center;
+  color: #FFF;
+  left: 0px;
+  bottom: 0px;
+  margin: 0 0 0 0;
+
+}
+.tile-like {
+  position: absolute;
+  padding-bottom: 5px;
+  color: #FFF;
+  left: 20px;
+  top: 10px;
+  margin: 0 0 0 0;
+}
+.tile-pinterest {
+  position: absolute;
+  padding-bottom: 5px;
+  color: #FFF;
+  right: 20px;
+  top: 10px;
+  margin: 0 0 0 0;
+
+}
+.like-count {
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 .galleria {
-  height: 300px;
   width: 300px;
   display: inline-block;
   float: left;
@@ -126,13 +172,13 @@ input.name {
 }
 
 .user-image{
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
   height: 100px;
 }
 
 .small-image {
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
   height: 64px;
 }
@@ -153,7 +199,7 @@ body {
   color: red;
 }
 div.tagging {
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.22);
   float: left;
   margin: 5px;
@@ -210,11 +256,10 @@ ul.dropdown-menu {
   min-width: 50px;
 }
 #recipeCarousel {
-  height: 300px;
   width: 300px;
   position: relative;
   background: #000;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 }
 img.carousel-image {
@@ -223,7 +268,7 @@ img.carousel-image {
   margin-left: auto;
   margin-right: auto;
   vertical-align: middle;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
 }
 .carousel-control {
@@ -235,7 +280,6 @@ img.carousel-image {
 }
 
 .carousel-inner > .item {
-  height: 300px;
   width: 300px;
 }
 

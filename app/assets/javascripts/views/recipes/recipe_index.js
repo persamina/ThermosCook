@@ -5,6 +5,7 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
     $(window).on("resize", this.positionTiles); 
 	},
   events: {
+    "click .tile-like": "likeTile"
   },
 	template: JST["recipes/index"],
 	recipeTemplate: JST["recipes/recipe_detail_list"],
@@ -13,13 +14,14 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
 
 	render: function() {
 		var recipeIndex = this;
+    var tileWidth =  250;
 		var renderedContent = this.template({currentUser: ThermosCook.CurrentUser});
 		this.$el.html(renderedContent);
 		this.$("#tiles").empty();
 
     var tilesPinned = 0;
     ThermosCook.pinnedArticles.each(function(article, index) {
-      var imgHeight = 200;
+      var imgHeight = tileWidth;
       if(article.get("article_photos").length > 0) {
         imgHeight = imgHeight * article.get("article_photos").models[0].get("ratio");
       }
@@ -28,7 +30,7 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
         {article: article,
          placementId: tilesPinned,
          imgHeight: imgHeight,
-         imgWidth: 200
+         imgWidth: tileWidth
         }
       );
 			recipeIndex.$(".row-fluid#tiles").append(articleRenderedContent);
@@ -36,7 +38,7 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
     });
 
 		this.collection.each(function(recipe, index) {
-      var imgHeight = 200;
+      var imgHeight = tileWidth;
       if(recipe.get("recipe_photos").length > 0) {
         imgHeight = imgHeight * recipe.get("recipe_photos").models[0].get("ratio");
       }
@@ -45,7 +47,7 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
         {recipe: recipe,
          placementId: tilesPinned,
          imgHeight: imgHeight,
-         imgWidth: 200
+         imgWidth: tileWidth
         }
       );
 			recipeIndex.$(".row-fluid#tiles").append(recipeRenderedContent);
@@ -76,12 +78,17 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
     $("a[data-recipe-id='"+ data.id +"']").remove();
     this.positionTiles();
   },
+  likeTile: function(event) {
+    event.preventDefault();
+    console.log("like tile");
+  },
   positionTiles: function() {
     var recipeIndex = this;
-    var totalHorizontalMargin = 10;
-    var totalVerticalMargin = 10;
+    var tileWidth = 250;
+    var totalHorizontalMargin = 20;
+    var totalVerticalMargin = 20;
     var numberPlaced = 0;
-    var numberPerRow = Math.floor(recipeIndex.$("#tiles").width()/(200 + totalHorizontalMargin));
+    var numberPerRow = Math.floor(recipeIndex.$("#tiles").width()/(tileWidth + totalHorizontalMargin));
     var numberToPlace = recipeIndex.$("#tiles").children().length;
     var lowestPosition = new Array(numberPerRow);
 
@@ -97,7 +104,7 @@ ThermosCook.Views.RecipeIndex = Backbone.View.extend({
         positions.topPosition = lowestPosition[lPIndex];
       } 
 
-      positions.leftPosition = (200 + totalHorizontalMargin) * (numberPlaced % numberPerRow);
+      positions.leftPosition = (tileWidth + totalHorizontalMargin) * (numberPlaced % numberPerRow);
 
       //$($(tile).children()).attr("style", "top: " + positions.topPosition + "px;" + 
       //                                   "left: "+  positions.leftPosition + "px; ");

@@ -2,18 +2,33 @@
 <div class="tile" 
      id="recipe" 
      data-recipe-id="<%=recipe.id %>" 
-     data-placementId="<%=placementId %>">
+     data-placementId="<%=placementId %>"
+     style="
+      height: <%= imgHeight %>px;
+      width: <%= imgWidth %>px;
+      <% if(recipe.get("recipe_photos").models.length > 0 ) { %>
+        background-image: url('<%- recipe.get('recipe_photos').models[0].get('thumbnail_url') %>'); 
+      <% } else { %>
+        background-image: url('recipe_placeholder.png'); 
+      <% } %>
+    " 
+>
 
-  <div>
-  <% if(recipe.get("recipe_photos").models.length > 0 ) { %>
-    <img src="<%- recipe.get("recipe_photos").models[0].get("thumbnail_url") %>" style="height: <%= imgHeight %>px; width: <%= imgWidth %>px;"></img>
-  <% } else { %>
-    <img src="recipe_placeholder.png" style="height: <%= imgHeight %>px; width: <%= imgWidth %>px;"></img>
-  <% } %>
+  <div class="opaque"
+       style="
+       height: <%= imgHeight %>px;
+        width: <%= imgWidth %>px;
+       "
+  >
   </div>
 
-  <div class="tile-title">
-    <h5><%- recipe.get("name") %></h5>
-  </div>
+    <h4 class="tile-title"><%- recipe.get("name") %></h4>
+    <div class="tile-like" >
+      <span><i class="fa fa-heart color-red"></i></span>
+      <span class="like-count"><%= recipe.get("likes") %></span>
+    </div>
+    <div class="tile-pinterest" >
+      <span><i class="fa fa-pinterest color-red"></i></span>
+    </div>
 </div>
 </a>
