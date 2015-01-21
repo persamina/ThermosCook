@@ -2,7 +2,7 @@ class RecipePhoto < ActiveRecord::Base
   attr_accessible :description, :photo, :recipe_id, :ratio
 	has_attached_file :photo, :styles => {
 		thumb: "300x",
-		original: "640x640"
+		original: "750x750"
 	}
   after_post_process :save_image_ratio
 	belongs_to :recipe, :inverse_of => :recipe_photos
