@@ -46,8 +46,10 @@ gem 'oj'
 
 gem 'devise'
 
-gem 'letter_opener', :group => :development
-gem 'debugger', :group => :development
+group :development :test do
+  gem 'letter_opener'
+  gem 'debugger'
+end
 
 #commented out
 #gem 'nokogiri'
