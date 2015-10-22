@@ -7,4 +7,5 @@ class Article < ActiveRecord::Base
   has_many :likes, as: :likeable, :dependent => :destroy, :inverse_of => :likeable
   has_many :tags, as: :tagable, :dependent => :destroy, :inverse_of => :tagable
   has_many :taggings, through: :tags, source: :tagging
+  belongs_to :user, :inverse_of => :articles
 end

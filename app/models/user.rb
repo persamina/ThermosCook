@@ -7,9 +7,11 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :username, :remember_me, :photo
-  validates :username, :uniqueness => true
+  validates :username, :email, :presence => true
+  validates :username, :email, :uniqueness => true
   # attr_accessible :title, :body
 	has_many :user_photos, :dependent => :destroy, :inverse_of => :user
 	has_many :recipes, :dependent => :destroy, :inverse_of => :user
   has_many :likes, :dependent => :destroy, :inverse_of => :user
+	has_many :articles, :dependent => :destroy, :inverse_of => :user
 end

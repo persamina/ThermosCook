@@ -46,11 +46,20 @@ gem 'oj'
 
 gem 'devise'
 
-group :development :test do
+group :development, :test do
   gem 'letter_opener'
   gem 'debugger'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'capybara'
+  gem 'capybara-email'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
+group :test do
+end
 #commented out
 #gem 'nokogiri'
 

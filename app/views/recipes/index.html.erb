@@ -1,16 +1,16 @@
 <div class="content"></div>
 
 <script type="application/json" id="user-data">
-<%= (( render(:file => 'users/user.rabl') ).html_safe) if @user %>
+<%= (( render(:file => 'users/user', :handlers => [:rabl]) ).html_safe) if @user %>
 </script>
 
 <script type="application/json" id="recipes-data">
-<%= ( render(:file => 'recipes/indexRABL.rabl') ).html_safe %>
+<%= ( render(:file => 'recipes/indexRABL', :handlers => [:rabl]) ).html_safe %>
 </script>
 
 <script type="application/json" id="articles-data">
-<%= ( render(:file => 'articles/indexRABL.rabl') ).html_safe %>
+<%= ( render(:file => 'articles/indexRABL', :handlers => [:rabl]) ).html_safe %>
 </script>
 <script type="application/json" id="taggings-data">
-<%= ( render(:file => 'taggings/indexRABL.rabl') ).html_safe %>
+<%= ( render(:file => 'taggings/indexRABL', :handlers => [:rabl]) ).html_safe %>
 </script>

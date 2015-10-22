@@ -21,7 +21,7 @@ class SessionsController < Devise::SessionsController
       :recipe_photos]}, 
       :user_photos, :likes])
 
-    return render "app/views/users/user.rabl"
+    return render "app/views/users/user", :handlers => [:rabl]
   end
 
   def failure

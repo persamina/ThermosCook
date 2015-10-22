@@ -19,7 +19,7 @@ ThermosCook.Models.User = Backbone.Model.extend({
     },
     password: {
       required: true,
-      minLength: 5,
+      minLength: 8,
       maxLength: 50,
     },
     password_confirmation: {

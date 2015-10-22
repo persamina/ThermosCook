@@ -13,7 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
         #set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
         @user = resource
         expire_data_after_sign_in!
-        return render "app/views/users/user.rabl"
+        return render "app/views/users/user", :handlers => [:rabl]
       end
     else
       clean_up_passwords resource
@@ -22,7 +22,7 @@ class RegistrationsController < Devise::RegistrationsController
         @minimum_password_length = resource_class.password_length.min
       end
       @user = resource
-      return render "app/views/registrations/error.rabl", :status => :not_acceptable
+      return render "app/views/registrations/error", :handlers => [:rabl], :status => :not_acceptable
     end
   end
 
@@ -40,12 +40,12 @@ class RegistrationsController < Devise::RegistrationsController
       end
       sign_in resource_name, resource, bypass: true
       @user = resource
-      return render "app/views/users/user.rabl"
+      return render "app/views/users/user", :handlers => [:rabl]
       #respond_with resource, location: after_update_path_for(resource)
     else
       clean_up_passwords resource
       @user = resource
-      return render "app/views/registrations/error.rabl"
+      return render "app/views/registrations/error", :handlers => [:rabl]
       #respond_with resource
     end
   end
